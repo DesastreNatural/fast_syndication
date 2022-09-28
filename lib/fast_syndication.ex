@@ -20,7 +20,7 @@ defmodule FastSyndication do
   end
 
   def parse_atom(""), do: {:error, "Cannot parse blank string"}
-  def parse_atom(_somethig_else), do: {:error, "RSS feed must be passed in as a string"}
+  def parse_atom(_something_else), do: {:error, "RSS feed must be passed in as a string"}
 
   @doc ~S"""
   Parse an rss string into a map
@@ -32,10 +32,29 @@ defmodule FastSyndication do
   end
 
   def parse_rss(""), do: {:error, "Cannot parse blank string"}
-  def parse_rss(_somethig_else), do: {:error, "RSS feed must be passed in as a string"}
+  def parse_rss(_something_else), do: {:error, "RSS feed must be passed in as a string"}
 
   defp map_to_tuple(%{"Ok" => map}), do: {:ok, map}
   defp map_to_tuple({:ok, map}), do: {:ok, map}
   defp map_to_tuple(%{"Err" => msg}), do: {:error, msg}
   defp map_to_tuple({:error, msg}), do: {:error, msg}
+
+  ###
+
+  def recognize(data) do
+    case parse_atom(data) do
+      {:error, _atom_error} ->
+        case parse_rss(data) do
+          {:error, rss_error} -> {:error, "Can't recognize feed type: #{Kernel.inspect(rss_error)}"}
+          {:ok, data} -> {:ok, :rss, data}
+        end
+      {:ok, data} -> {:ok, :atom, data}
+    end
+  end
+
+  def parse(data) do
+    recognize(data) |> # IO.inspect |>
+    FastSyndication.Normalization.normalize_feed()
+  end
+
 end

@@ -30,6 +30,7 @@ defmodule FastSyndication.MixProject do
   defp deps do
     [
       {:rustler, "~> 0.25.0"},
+      {:httpoison, "~> 1.8", only: :test},
       {:ex_doc, "~> 0.27", only: :dev, runtime: false}
     ]
   end
