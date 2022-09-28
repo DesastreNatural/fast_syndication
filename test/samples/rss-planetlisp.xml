@@ -1,0 +1,1641 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+<channel>
+	<title>Planet Lisp</title>
+	<link>http://planet.lisp.org/</link>
+	<description>Planet Lisp</description>
+	<language>en</language>
+
+
+<item>
+	<title>Nicolas Hafner: Kandria enters beta - September Kandria Update</title>
+	<guid isPermaLink="true">https://reader.tymoon.eu/article/415</guid>
+	<link>https://reader.tymoon.eu/article/415</link>
+	
+	<description>&lt;h1 id="Beta Release - September Kandria Update"&gt;Beta Release - September Kandria Update&lt;/h1&gt;&lt;img alt="https://studio.tymoon.eu/api/studio/file?id=2229" src="https://studio.tymoon.eu/api/studio/file?id=2229" /&gt;&lt;p&gt;Kandria has finally entered beta, and the keys have been rolled out to all the Kickstarter backers of the Hunter tier and above. We've already got some good feedback in from that, and are continuing to polish the remaining areas.&lt;/p&gt;&lt;p&gt;If you're a beta backer and haven't gotten your key, please check your emails and your Backerkit account here: &lt;a href="https://kandria.backerkit.com/"&gt;https://kandria.backerkit.com/&lt;/a&gt;&lt;/p&gt;&lt;p&gt;In case you missed the Kickstarter but would still like to support us, you can also do so by &lt;a class="external-link" href="https://kandria.com/preorder"&gt;preordering Kandria or its soundtrack&lt;/a&gt; through Backerkit. Unlike Kickstarter, this also accepts PayPal, if you don't have access to a credit card.&lt;/p&gt;&lt;h2 id="Gamescom &amp; Devcom"&gt;Gamescom &amp;amp; Devcom&lt;/h2&gt;&lt;p&gt;We were part of the Swiss Games delegation to Gamescom this year, and had a stand at their incredible booth:&lt;/p&gt;&lt;img alt="https://filebox.tymoon.eu//file/TWpVM05nPT0=" src="https://filebox.tymoon.eu//file/TWpVM05nPT0=" /&gt;&lt;p&gt;A bunch of people stopped by to talk to us about the game and try it out for themselves, which is always fun to observe.&lt;/p&gt;&lt;img alt="https://filebox.tymoon.eu//file/TWpVM053PT0=" src="https://filebox.tymoon.eu//file/TWpVM053PT0=" /&gt;&lt;p&gt;On Thursday we were even allowed to use the booth's big LED wall for a small event, where participants could race for the lowest time in one of our side quests!&lt;/p&gt;&lt;p&gt;It was all an extremely exhausting week, though. Having to stand at the booth all day, plus the almost two hours of travel time between the venue and where I was staying every morning and evening ended up being quite taxing.&lt;/p&gt;&lt;p&gt;Luckily I somehow managed to dodge Covid again, despite most people not wearing a mask again...&lt;/p&gt;&lt;h2 id="Development"&gt;Development&lt;/h2&gt;&lt;p&gt;In the meantime, development continued and we finally got some full-game playthrough tests done! We asked a number of people to play through the game casually, and found that on average a playthrough will take about 6-8 hours, which is an &lt;em&gt;excellent&lt;/em&gt; time for a game of this type. If you do all the side quests, I imagine it'll take about 10-12 hours. And if you go for all the secrets and everything, probably even longer than that, so there's definitely a lot of content stuffed into the game!&lt;/p&gt;&lt;p&gt;So compared to &lt;a class="external-link" href="https://reader.tymoon.eu/article/414"&gt;last month&lt;/a&gt;, we already got two of the major steps left to do finished out. The main questline is working well, and all of the side quests for the game, including the Kickstarter stretch goal &amp;quot;Synthesis&amp;quot; questline are done and playable. We're also almost done detailing in all the rooms with tiles. We also tuned the RPG levelling quite a bit already, though I imagine I'll want to tune that some more based on player feedback.&lt;/p&gt;&lt;img alt="https://filebox.tymoon.eu//file/TWpVM09RPT0=" src="https://filebox.tymoon.eu//file/TWpVM09RPT0=" /&gt;&lt;p&gt;What's left to do now is mostly ironing out all of the bugs, testing everything front and back and whatever other ways we can think of, and marketing the game some more to make sure people actually know it exists, too. And here's where I unfortunately have to make another announcement: the release will be delayed to January. Releasing in November is not a good move, especially for a young studio like ours. January is much calmer and generally results in better marketing and better sales, which we'll really need.&lt;/p&gt;&lt;p&gt;The time spent between November and January won't be wasted, though. We'll keep responding to feedback from our testers, and we'll work on the stretch goals from the Kickstarter as well. With any luck, the game will be able to launch with the level editor already integrated and available!&lt;/p&gt;&lt;p&gt;But yes, we need a good launch if we're to make more games, and I really, really would like to. Again, I ask that if you know anyone at all, or any groups that may be interested in Kandria, please share the &lt;a class="external-link" href="https://kandria.com/steam"&gt;steam page&lt;/a&gt; with them. It would help us out a lot, as we're not doing so hot with our general outreach.&lt;/p&gt;&lt;p&gt;Well then, that's it for this month. See you next month, or next week if you're on the &lt;a class="external-link" href="https://courier.tymoon.eu/subscription/1"&gt;mailing list&lt;/a&gt;!&lt;/p&gt;</description>
+	
+	<pubDate>Wed, 07 Sep 2022 16:46:00 GMT</pubDate>
+</item>
+
+<item>
+	<title>Joe Marshall: Playing with raycasting</title>
+	<guid isPermaLink="true">http://funcall.blogspot.com/2022/09/playing-with-raycasting.html</guid>
+	<link>http://funcall.blogspot.com/2022/09/playing-with-raycasting.html</link>
+	
+	<description>&lt;p&gt;I wanted to learn about raycasting.  Raycasting is like a
+  simplified version of ray tracing.  As in ray tracing, you examine
+  the environment by projecting a ray from your current location out
+  in some direction to determine what is visible in that direction.
+  But we simplify the problem by only considering two dimensions.&lt;/p&gt;
+
+&lt;p&gt;I was also interested in making the graphics more functional and
+  less dependent upon side effects.  Now obviously rendering an image
+  to the screen is going to involve side effects, but we can refactor
+  the rendering problem into two subproblems, a pure function that
+  maps the world to an image and the procedure that displays the
+  image.&lt;/p&gt;
+
+&lt;p&gt;I'll put the code below.  The &lt;code&gt;run&lt;/code&gt; procedure implements
+  the event loop state machine.  It keeps track of the world and
+  calls &lt;code&gt;next-world&lt;/code&gt; on the current world to update the
+  world as time passes.  &lt;code&gt;next-world&lt;/code&gt; just
+  maps &lt;code&gt;next-state&lt;/code&gt; over the objects in the
+  world.  &lt;code&gt;next-state&lt;/code&gt; does not mutate an object, rather it
+  returns a new object in the new state.   Every 13
+  milliseconds, &lt;code&gt;run&lt;/code&gt; calls &lt;code&gt;render-world!&lt;/code&gt;,
+  which calls &lt;code&gt;render!&lt;/code&gt; on each object in the world.&lt;/p&gt;
+
+&lt;p&gt;We're going to use raycasting to fake up a first-person view of a
+  two-dimensional maze.  From a position within the maze, we'll cast a
+  ray in a direction and see how far away the wall is.  If we peer at
+  the wall through a narrow slit in just that direction, it will
+  appear as a vertical line with height inversely proportional to its
+  distance.  If we sweep the ray direction and stack the vertical
+  lines next to each other, it will create three dimensional
+  effect.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;render!&lt;/code&gt; method for a &lt;code&gt;fp-view&lt;/code&gt; will
+  side effect the screen, but we'll compute the contents
+  functionally.  We'll go through each column on the screen and
+  call &lt;code&gt;(vraster fp-view column)&lt;/code&gt; to compute a color and a
+  height and we'll draw a vertical line of that height in that color
+  in that column.&lt;/p&gt;
+&lt;pre&gt;(defmethod render! (renderer (fp-view fp-view))
+  (dotimes (column +window-width+)
+    (multiple-value-bind (r g b height)
+        (vraster fp-view column)
+      (sdl2:set-render-draw-color renderer r g b #xFF)
+      (sdl2:render-draw-line renderer
+                             column (round (+ (/ +window-height+ 2) (/ height 2)))
+                             column (round (- (/ +window-height+ 2) (/ height 2)))))))&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;vraster&lt;/code&gt; is a function that returns the color and
+  height of the wall on a particular column on the screen.  It figures
+  out the angle at which to cast to a ray and calls &lt;code&gt;range&lt;/code&gt;
+  to find the distance to the nearest wall at that angle.  This is
+  sufficient to determine the wall height for that column, but the
+  first person effect is enhanced significantly if you tint the color
+  according to the distance and the direction of the wall.  Knowing the
+  distance, we compute the exact point &lt;code&gt;px, py&lt;/code&gt; that
+  the ray hit.  It's a wall in the &lt;code&gt;x&lt;/code&gt; direction
+  if the &lt;code&gt;y&lt;/code&gt; coordinate is an integer and vice versa.
+  &lt;pre&gt;(defparameter +field-of-view+ (/ pi 4))
+
+(defun column-&amp;gt;theta (column)
+  (- (* (/ column +window-width+) +field-of-view+) (/ +field-of-view+ 2)))
+
+(defun vraster (fp-view column)
+  (let* ((location (get-location fp-view))
+         (theta (column-&amp;gt;theta column))
+         (distance (range location theta))
+         (px (+ (get-x location) (* (sin (+ (get-theta location) theta)) distance)))
+         (py (+ (get-y location) (* (cos (+ (get-theta location) theta)) distance)))
+         (wx (&amp;lt; (abs (- py (round py))) 0.05))
+         (wy (&amp;lt; (abs (- px (round px))) 0.05)))
+    (values
+     (min #xFF (floor (/ (if wx #xff #x00) distance)))
+     (min #xFF (floor (/ #xFF distance)))
+     (min #xFF (floor (/ (if wy #xff #x00) distance)))
+     (min +window-height+ (/ (* +window-height+ 2) distance)))))&lt;/pre&gt;&lt;/p&gt;
+
+&lt;p&gt;So we've factored the rendering of a frame into a procedure that
+  draws on the screen and a function that returns what to draw.  The
+  direct advantage of this is that we can determine what we should
+  draw without actually drawing it.  As an example, suppose we wanted
+  to generate a stereo pair of images.  The only thing we need to
+  change is the &lt;code&gt;render!&lt;/code&gt; method.  It will now compute the
+  view from two slightly different locations and put one set of
+  columns on the left and the other on the right.&lt;pre&gt;(defmethod render! (renderer (fp-view fp-view))
+  (dotimes (column (/ +window-width+ 2))
+    (multiple-value-bind (r g b height)
+        (vraster (left-eye (get-location fp-view)) (* column 2))
+      (sdl2:set-render-draw-color renderer r g b #xFF)
+      (sdl2:render-draw-line renderer
+                             column (round (+ (/ +window-height+ 2) (/ height 2)))
+                             column (round (- (/ +window-height+ 2) (/ height 2)))))
+    (multiple-value-bind (r g b height)
+        (vraster (right-eye (get-location fp-view)) (* column 2))
+      (sdl2:set-render-draw-color renderer r g b #xFF)
+      (sdl2:render-draw-line renderer
+                             (+ column (/ +window-width+ 2)) (round (+ (/ +window-height+ 2) (/ height 2)))
+                             (+ column (/ +window-width+ 2)) (round (- (/ +window-height+ 2) (/ height 2)))))))&lt;/pre&gt;
+&lt;/p&gt;
+&lt;p&gt;In this and in a previous post I've gone through the effort of
+  writing some graphics code while avoiding unnecessary side effects.
+  Typical graphics examples and tutorials are stuffed to the brim with
+  global variables, state, and side effects.  I wanted to see which
+  side effects were intrinsic to graphics and which are simply
+  incidental to how the examples are coded.  It appears that large
+  amounts of the global state and side effects are unnecessary and
+  a more functional approach is reasonable.&lt;/p&gt;
+
+&lt;p&gt;As promised, here is the code.&lt;/p&gt;
+&lt;pre&gt;
+;;; -*- Lisp -*-
+
+(defpackage "RAYCAST"
+  (:shadowing-import-from "NAMED-LET" "LET")
+  (:use "COMMON-LISP" "NAMED-LET""))
+
+(in-package "RAYCAST")
+
+(defparameter +window-height+ 480)
+(defparameter +window-width+ 640)
+
+(defgeneric next-state (object dt)
+  (:method ((object t) dt) object))
+(defgeneric render! (renderer thing))
+
+(defun next-world (previous-world dt)
+  (map 'list (lambda (object) (next-state object dt)) previous-world))
+
+(defun render-world! (renderer world)
+  (sdl2:set-render-draw-color renderer #x00 #x00 #x00 #xFF)
+  (sdl2:render-clear renderer)
+  (mapc (lambda (object) (render! renderer object)) world)
+  (sdl2:render-present renderer))
+
+(defun run (initial-world)
+  (sdl2:with-init (:video)
+    (sdl2:with-window (window
+                       :h +window-height+
+                       :w +window-width+
+                       :flags '(:shown))
+      (sdl2:with-renderer (renderer window :index -1 :flags '(:accelerated :presentvsync))
+
+        (let ((last-ticks 0)
+              (render-ticker 0)
+              (title-ticker 0)
+              (sim-count 0)
+              (frame-count 0)
+              (world initial-world))
+
+          (flet ((title-tick! (dticks)
+                   (incf title-ticker dticks)
+                   (when (&amp;gt;= title-ticker 1000)
+                     (decf title-ticker 1000)
+                     (sdl2:set-window-title window
+                                            (format nil "Sim rate: ~d, Frame rate: ~d"
+                                                    sim-count frame-count))
+                     (setq sim-count 0)
+                     (setq frame-count 0)))
+
+                 (world-tick! (dticks)
+                   (incf sim-count)
+                   (setq world (next-world world (/ dticks 1000))))
+
+                 (render-tick! (dticks)
+                   (incf render-ticker dticks)
+                   (when (&amp;gt;= render-ticker 13)
+                     (incf frame-count)
+                     (decf render-ticker 13)
+                     (render-world! renderer world))))
+
+            (sdl2:with-event-loop (:method :poll)
+
+              (:idle ()
+                     (let ((this-ticks (sdl2:get-ticks)))
+                       (if (= this-ticks last-ticks)
+                           (sdl2:delay 1)
+                           (let ((dticks (- this-ticks last-ticks)))
+                             (setq last-ticks this-ticks)
+                             (title-tick! dticks)
+                             (world-tick! dticks)
+                             (render-tick! dticks)))))
+
+              (:keydown (:keysym keysym)
+                        (case (sdl2:scancode keysym)
+                          ((:scancode-x :scancode-escape) (sdl2:push-quit-event))
+                          ((:scancode-left :scancode-right
+                            :scancode-up :scancode-down
+                            :scancode-pageup :scancode-pagedown)
+                           nil)
+                          (t (format *trace-output* "~&amp;amp;Keydown: ~s" (sdl2:scancode keysym))
+                           (force-output *trace-output*))))
+
+              (:quit () t)
+              )))))))
+
+(defparameter +maze+
+  #2a((1 1 1 1 1 1 1 1 1 1 1 1)
+      (1 0 0 1 0 0 0 0 0 0 0 1)
+      (1 0 0 1 0 0 0 0 0 0 0 1)
+      (1 0 1 1 0 0 0 1 0 1 0 1)
+      (1 0 0 0 0 0 0 0 0 0 0 1)
+      (1 0 0 0 0 0 0 1 0 1 0 1)
+      (1 0 0 0 0 0 0 0 0 0 0 1)
+      (1 0 0 0 0 0 0 0 0 0 0 1)
+      (1 0 0 0 0 1 0 0 0 1 0 1)
+      (1 0 0 0 0 0 0 0 0 0 0 1)
+      (1 1 1 1 1 1 1 1 1 1 1 1)))
+
+(defclass location ()
+  ((maze :initarg :maze
+         :initform +maze+
+         :reader get-maze)
+   (x :initarg :x
+      :initform 2.5
+      :reader get-x)
+   (y :initarg :y
+      :initform 2.5
+      :reader get-y)
+   (theta :initarg :theta
+          :initform 0
+          :reader get-theta)))
+
+(defun ud-input ()
+  (- (if (sdl2:keyboard-state-p :scancode-up) 1 0)
+     (if (sdl2:keyboard-state-p :scancode-down) 1 0)))
+
+(defun lr-input ()
+  (- (if (sdl2:keyboard-state-p :scancode-right) 1 0)
+     (if (sdl2:keyboard-state-p :scancode-left) 1 0)))
+
+(defun pg-input ()
+  (- (if (sdl2:keyboard-state-p :scancode-pageup) 1 0)
+     (if (sdl2:keyboard-state-p :scancode-pagedown) 1 0)))
+
+(defun canonicalize-angle (angle)
+  (cond ((&amp;gt;= angle pi) (canonicalize-angle (- angle (* pi 2))))
+        ((&amp;gt;= angle (- pi)) angle)
+        (t (canonicalize-angle (+ angle (* pi 2))))))
+
+(defparameter +translation-rate+ 3.0) ;; tiles per second
+(defparameter +rotation-rate+ pi) ;; radians per second
+
+(defmethod next-state ((location location) dt)
+  (let ((fbstep (* (ud-input) +translation-rate+ dt))
+        (lrstep (* (pg-input) +translation-rate+ dt))
+        (thstep (* (lr-input) +rotation-rate+ dt))
+
+        (old-x (get-x location))
+        (old-y (get-y location))
+        (cos-theta (cos (get-theta location)))
+        (sin-theta (sin (get-theta location))))
+
+    (let ((new-x (+ old-x (* sin-theta fbstep) (- (* cos-theta lrstep))))
+          (new-y (+ old-y (* cos-theta fbstep) (+ (* sin-theta lrstep))))
+          (new-theta (canonicalize-angle (+ (get-theta location) thstep))))
+      (cond ((zerop (aref (get-maze location) (floor new-x) (floor new-y)))
+             (make-instance 'location :x new-x :y new-y :theta new-theta))
+            ((zerop (aref (get-maze location) (floor old-x) (floor new-y)))
+             (make-instance 'location :x old-x :y new-y :theta new-theta))
+            ((zerop (aref (get-maze location) (floor new-x) (floor old-y)))
+             (make-instance 'location :x new-x :y old-y :theta new-theta))
+            (t
+             (make-instance 'location :x old-x :y old-y :theta new-theta))))))
+
+(defclass fp-view ()
+  ((location :initarg :location
+             :reader get-location)))
+
+(defmethod next-state ((fp-view fp-view) dt)
+  (make-instance 'fp-view :location (next-state (get-location fp-view) dt)))
+
+(defun range (location relative-theta)
+  (let* ((angle (+ (get-theta location) relative-theta))
+
+         (dx/dS (sin angle))
+         (dy/dS (cos angle))
+
+         (x-step (if (&amp;lt; dx/dS 0) -1 1))
+         (y-step (if (&amp;lt; dy/dS 0) -1 1))
+
+         (dS/dx (abs (/ 1 (if (zerop dx/dS) 1e-30 dx/dS))))
+         (dS/dy (abs (/ 1 (if (zerop dy/dS) 1e-30 dy/dS)))))
+
+    (let dda ((next-x (* dS/dx
+                         (if (&amp;lt; dx/dS 0)
+                             (- (get-x location) (floor (get-x location)))
+                             (- (+ 1.0 (floor (get-x location))) (get-x location)))))
+              (mapx (floor (get-x location)))
+              (next-y (* dS/dy
+                         (if (&amp;lt; dy/dS 0)
+                             (- (get-y location) (floor (get-y location)))
+                             (- (+ 1.0 (floor (get-y location))) (get-y location)))))
+              (mapy (floor (get-y location)))
+              (distance 0))
+      (cond ((not (zerop (aref (get-maze location) mapx mapy))) distance)
+            ((&amp;lt; next-x next-y)
+             (dda (+ next-x dS/dx) (+ mapx x-step)
+                  next-y mapy
+                  next-x))
+            (t
+             (dda next-x mapx
+                  (+ next-y dS/dy) (+ mapy y-step)
+                  next-y))))))
+
+(defparameter +field-of-view+ (/ pi 4))
+
+(defun column-&amp;gt;theta (column)
+  (- (* (/ column +window-width+) +field-of-view+) (/ +field-of-view+ 2)))
+
+(defun vraster (location column)
+  (let* ((theta (column-&amp;gt;theta column))
+         (distance (range location theta))
+         (px (+ (get-x location) (* (sin (+ (get-theta location) theta)) distance)))
+         (py (+ (get-y location) (* (cos (+ (get-theta location) theta)) distance)))
+         (wx (&amp;lt; (abs (- py (round py))) 0.05))
+         (wy (&amp;lt; (abs (- px (round px))) 0.05)))
+    (values
+     (min #xFF (floor (/ (if wx #xff #x00) distance)))
+     (min #xFF (floor (/ #xfF distance)))
+     (min #xFF (floor (/ (if wy #xff #x00) distance)))
+     (min +window-height+ (/ (* +window-height+ 2) distance)))))
+
+(defmethod render! (renderer (fp-view fp-view))
+  (dotimes (column +window-width+)
+    (multiple-value-bind (r g b height)
+        (vraster (get-location fp-view) column)
+      (sdl2:set-render-draw-color renderer r g b #xFF)
+      (sdl2:render-draw-line renderer
+                             column (round (+ (/ +window-height+ 2) (/ height 2)))
+                             column (round (- (/ +window-height+ 2) (/ height 2)))))))
+
+;; (run (list (make-instance 'fp-view :location (make-instance 'location))))
+&lt;/pre&gt;</description>
+	
+	<pubDate>Wed, 07 Sep 2022 14:07:00 GMT</pubDate>
+</item>
+
+<item>
+	<title>Joe Marshall: Drawing a circle</title>
+	<guid isPermaLink="true">http://funcall.blogspot.com/2022/09/drawing-circle.html</guid>
+	<link>http://funcall.blogspot.com/2022/09/drawing-circle.html</link>
+	
+	<description>&lt;p&gt;SDL is your bare bones graphics interface.  It gives you primitives
+  like &lt;code&gt;draw-point&lt;/code&gt;, &lt;code&gt;draw-line&lt;/code&gt;,
+  and &lt;code&gt;draw-rectangle&lt;/code&gt;, but you're on your own if you want
+  to draw a circle.  Naturally, I cribbed the code from
+  stackoverflow.&lt;/p&gt;
+
+&lt;p&gt;Small circles didn't look right &amp;mdash; they were a little
+  squarish.  The code worked by walking along pixels in one direction
+  and accumulating an error term.  When the error term got large
+  enough, it would be reset and the code would advance a step along
+  the other pixel axis.  The error term was computed using integer
+  math so that the circle was drawn quickly.  The problem is that the
+  integer math has rounding error and the rounding error is noticable
+  with small circles.&lt;/p&gt;
+
+&lt;p&gt;For reference, it is straightforward to draw an exact circle.  A
+  circle isn't a function, but circle segment between 0 and 45 degrees
+  is a function.  If we mirror that segment eight ways horizontally,
+  vertically, and at 90 degrees, we'll get a full
+  circle.
+  &lt;pre&gt;
+(defun eightfold-point (renderer center-x center-y x y)
+  (sdl2:render-draw-point renderer (+ center-x x) (+ center-y y))
+  (sdl2:render-draw-point renderer (+ center-x x) (- center-y y))
+  (sdl2:render-draw-point renderer (- center-x x) (+ center-y y))
+  (sdl2:render-draw-point renderer (- center-x x) (- center-y y))
+
+  (sdl2:render-draw-point renderer (+ center-x y) (- center-y x))
+  (sdl2:render-draw-point renderer (+ center-x y) (+ center-y x))
+  (sdl2:render-draw-point renderer (- center-x y) (- center-y x))
+  (sdl2:render-draw-point renderer (- center-x y) (+ center-y x)))
+
+(defun draw-circle (renderer center-x center-y radius)
+  (let ((r-squared (* radius radius)))
+    (dotimes (x (1+ (ceiling (/ radius (sqrt 2)))))
+      (eightfold-point renderer
+                       center-x center-y
+                       x (round (sqrt (- r-squared (* x x))))))))&lt;/pre&gt;
+This gives much rounder looking circles than the code I cribbed from
+  stackoverflow.&lt;/p&gt;
+
+&lt;p&gt;The problem, of course, is that this code computes a square root
+  on each iteration.  These days, computers are fast and that's not a
+  big issue, but let's try to improve things.&lt;/p&gt;
+
+&lt;p&gt;On each iteration, we are computing the square root of
+  r&lt;sup&gt;2&lt;/sup&gt;-x&lt;sup&gt;2&lt;/sup&gt;.  This quantity changes between
+  iterations, but not by much.  You can compute a square root pretty
+  quickly using Newton's method.  The square root computed last
+  iteration isn't that far from the new square root, so we can use the
+  previous square root as the initial guess for Newton's method.
+  Since we started pretty close to the right answer, we only need a
+  single pass of Newton's method to get close enough to the
+  square root for the current iteration. &lt;pre&gt;
+(defun average (a b) (/ (+ a b) 2))
+
+(defun draw-circle1 (renderer center-x center-y radius)
+  (let ((x-limit (ceiling (/ radius (sqrt 2)))))
+    (do ((x 0 (1+ x))
+         (o 1 (+ o 2))
+         (r2-x2 (* radius radius) (- r2-x2 o))
+         (y radius (round (average y (/ (- r2-x2 o) y)))))
+        ((&amp;gt; x x-limit))
+      (eightfold-point renderer center-x center-y x y))))&lt;/pre&gt;
+
+&lt;p&gt;This gives us pretty round circles &amp;mdash; rounder than the integer
+  methods, but not as round as the sqrt method.  It requires less
+  arithmetic than the sqrt method, but more than the integer method.
+  What is more annoying, squarish circles or the amount of time it
+  takes to draw round ones?&lt;/p&gt;</description>
+	
+	<pubDate>Mon, 05 Sep 2022 15:16:00 GMT</pubDate>
+</item>
+
+<item>
+	<title>vindarel: Lisp for the web: deploying with Systemd, gotchas and solutions</title>
+	<guid isPermaLink="true">https://lisp-journey.gitlab.io/blog/lisp-for-the-web-deploy-with-systemd/</guid>
+	<link>https://lisp-journey.gitlab.io/blog/lisp-for-the-web-deploy-with-systemd/</link>
+	
+	<description>&lt;p&gt;How do you run your Common Lisp (web) application on your server?
+Nowadays most GNU/Linux distros have Systemd. I recently used it more,
+with a mix of applications running from source, from a binary, running
+locally or on my VPS. I had to bypass a few gotchas, so let&amp;rsquo;s
+recap&amp;rsquo; what you need to know.&lt;/p&gt;
+
+&lt;p&gt;Also &lt;em&gt;stay tuned&lt;/em&gt;: next, we&amp;rsquo;ll see how to build a standalone binary
+for your Common Lisp application with Deploy (so that we handle
+foreign libraries like libssl), how to include your Djula HTML
+templates as well as your static assets. This, in turns, makes it
+straightforward to &lt;em&gt;ship your web app into an Electron desktop
+window&lt;/em&gt;.&lt;/p&gt;
+
+
+
+&lt;div class="info"&gt;
+&lt;strong&gt;INFO:&lt;/strong&gt;
+dear readers, here's &lt;a href="https://www.udemy.com/course/common-lisp-programming/?couponCode=LISP-JOURNEY-220915"&gt; the best price I can set for my Udemy course "Learn Lisp effectively" &lt;/a&gt;, it will be available for 5 days! Thanks all for your support (NB: I'm working on the chapter on condition handling and new chapters are available for existing students).
+&lt;/div&gt;
+
+
+
+&lt;h2 id="before-systemd"&gt;Before Systemd&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s say we can run our app like this: we load the system definition,
+its dependencies, and we call the entry point.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sbcl --load my-app.asd \
+     --eval '(ql:quickload :my-app)' \
+     --eval '(my-app:start-app)'
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we need to put the app on the background, we must ensure that if
+it fails, it is restarted, if the server is restarted, our app too, we
+must ensure we get to see the logs, etc.&lt;/p&gt;
+
+&lt;p&gt;Maybe you run your app inside of Emacs on your VPS... maybe you run your
+app inside &lt;code&gt;tmux&lt;/code&gt;. This works and it is convenient to get back to the
+Lisp REPL, but this doesn&amp;rsquo;t ensure a restart on failure.&lt;/p&gt;
+
+&lt;h2 id="systemd-daemonizing-restarting-in-case-of-crashes-handling-logs"&gt;Systemd: daemonizing, restarting in case of crashes, handling logs&lt;/h2&gt;
+
+&lt;p&gt;Systemd (or the service system of your distro) can help with all that.&lt;/p&gt;
+
+&lt;p&gt;Write a service file like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ emacs -nw /etc/systemd/system/my-app.service
+[Unit]
+Description=Lisp app example
+
+[Service]
+WorkingDirectory=/path/to/your/app
+# Next, your command, with the full path to SBCL.
+# This works, locally. Be sure to see the last section.
+ExecStart=/usr/bin/sbcl --load run.lisp
+# or: use a path to your binary.
+Type=simple
+Restart=always
+RestartSec=10
+# Use environment variables:
+Environment=&amp;quot;SECRET=pGNqduRFkB4K9C2vijOmUDa2kPtUhArN&amp;quot;
+
+# Start or restart at boot:
+[Install]
+WantedBy=basic.target
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When you run your app on the terminal, ensure that its webserver
+(Hunchentoot here) stays listening correctly on the foreground
+(otherwise see below):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sbcl --load run.lisp
+Hunchentoot server is started.
+Listening on localhost:9003.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now run this command to &lt;strong&gt;start the service&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo systemctl start my-app.service
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;to check its &lt;strong&gt;status&lt;/strong&gt; use this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;systemctl status my-app.service
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Systemd handles &lt;strong&gt;logs&lt;/strong&gt; for you. We make our app write to stdout or stderr, Systemd writes logs:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;journalctl -u my-app.service
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;use &lt;code&gt;-f -n 30&lt;/code&gt; to see live updates of logs, where &lt;code&gt;-n&lt;/code&gt; is the number of lines you want as context.&lt;/p&gt;
+
+&lt;p&gt;The following tells Systemd to handle crashes and to &lt;strong&gt;restart the app&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Restart=always
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and this makes it &lt;strong&gt;start the app after a reboot&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[Install]
+WantedBy=basic.target
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;to enable it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo systemctl enable my-app.service
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now keep in mind a couple things.&lt;/p&gt;
+
+&lt;h3 id="make-it-stay-on-the-foreground"&gt;Make it stay on the foreground&lt;/h3&gt;
+
+&lt;p&gt;The first gotcha is that your app must stay on the foreground.&lt;/p&gt;
+
+&lt;p&gt;If you run your app from source, you might have nothing to do, you&amp;rsquo;ll
+get a Lisp REPL, from which you can interact with your running
+application. Awesome.&lt;/p&gt;
+
+&lt;p&gt;But, if you build a binary, you might see this error when you run it
+with Systemd:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-txt"&gt;* ;
+; compilation unit aborted
+; caught 1 fatal error condition&amp;quot; error.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This puzzled me: I thought I had a Lisp prompt (the &lt;code&gt;* ;&lt;/code&gt;) and
+that my program crashed, but no. I knew it, that&amp;rsquo;s simply Lisp quitting
+too early. Don&amp;rsquo;t rush and double check that your binary runs
+correctly.&lt;/p&gt;
+
+&lt;p&gt;What you must do can be found elsewhere (the Cookbook!): in your main
+function where you start your app, in this example with Hunchentoot,
+put its thread in the foreground:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-lisp"&gt;;; with bordeaux-threads. Also sb-ext: join-thread, thread-name, list-all-threads.
+(bt:join-thread (find-if (lambda (th)
+                            (search &amp;quot;hunchentoot&amp;quot; (bt:thread-name th)))
+                          (bt:all-threads)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id="let-it-crash-disable-debugger"&gt;Let it crash: &lt;code&gt;--disable-debugger&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;We want our app to crash so that it can be re-started automatically:
+you'll want the &lt;code&gt;--disable-debugger&lt;/code&gt; flag with SBCL, when you run your
+app from sources.&lt;/p&gt;
+
+&lt;h3 id="relying-on-quicklisp"&gt;Relying on Quicklisp&lt;/h3&gt;
+
+&lt;p&gt;When you run your apps locally, you most probably rely on Quicklisp
+being installed and being started in your init file (&lt;code&gt;~/.sbclrc&lt;/code&gt;):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-lisp"&gt;;;; The following lines added by ql:add-to-init-file:
+#-quicklisp
+(let ((quicklisp-init (merge-pathnames &amp;quot;quicklisp/setup.lisp&amp;quot;
+                                       (user-homedir-pathname))))
+  (when (probe-file quicklisp-init)
+    (load quicklisp-init)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There are 2 gotchas.&lt;/p&gt;
+
+&lt;p&gt;Systemd will, by default, run your app as root, so:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;if it happened you did install Quicklisp on your production machine,
+you probably didn&amp;rsquo;t install it as root, so Systemd won&amp;rsquo;t find the
+init file that initializes Quicklisp (and so your startup scripts
+will fail).
+
+&lt;ul&gt;
+&lt;li&gt;you can use SBCL&amp;rsquo;s &lt;code&gt;--userinit&lt;/code&gt; flag to tell the username where to find the init file.&lt;/li&gt;
+&lt;li&gt;you can set the Systemd user with &lt;code&gt;User=xyz&lt;/code&gt; in the &lt;code&gt;[service]&lt;/code&gt; section (disclaimer: untested).&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;the Quicklisp snippet will fail at &lt;code&gt;(user-homedir-pathname)&lt;/code&gt;, for a clash on usernames too, so Quicklisp won&amp;rsquo;t find its &lt;code&gt;setup.lisp&lt;/code&gt; file. I replaced this function call with a hard path (&lt;code&gt;/home/vindarel/&lt;/code&gt;), until I used a standalone binary.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;That&amp;rsquo;s it. Now you can deploy in peace. I hope I saved you some hours. Now these issues are better google-able \o/&lt;/p&gt;
+
+&lt;p&gt;See you around and stay tuned.&lt;/p&gt;</description>
+	
+	<pubDate>Tue, 30 Aug 2022 14:57:37 GMT</pubDate>
+</item>
+
+<item>
+	<title>Tim Bradshaw: Macros (from Zyni)</title>
+	<guid isPermaLink="true">https://www.tfeb.org/fragments/2022/08/27/macros-from-zyni/?utm_source=lisp&amp;utm_medium=RSS</guid>
+	<link>https://www.tfeb.org/fragments/2022/08/27/macros-from-zyni/?utm_source=lisp&amp;utm_medium=RSS</link>
+	
+	<description>&lt;blockquote&gt;
+ &lt;p&gt;It is the business of the future to be dangerous; and it is among the merits of science that it equips the future for its duties. &amp;mdash; Alfred North Whitehead&lt;/p&gt;&lt;/blockquote&gt;
+&lt;!-- more--&gt;
+
+&lt;p&gt;Once upon a time, long ago in a world far away, Lisp had many features which other languages did not have. Automatic storage management, dynamic typing, an interactive environment, lists, symbols &amp;hellip; and macros, which allow you to seamlessly extend the language you have into the language you want and need.&lt;/p&gt;
+
+&lt;p&gt;But that was long long ago in a world far away where giants roamed the earth, trolls lurked under every bridge and, they say, gods yet lived on certain distant mountains.&lt;/p&gt;
+
+&lt;p&gt;Today, and in this world, many many languages have automatic storage management, are dynamically typed, have symbols, lists, interactive environments, and so and so and so. More of these languages arise from the thick, evil-smelling sludge that coats every surface each day: hundreds, if not thousands of them, like flies breeding on bad meat which must be swatted before they lay their eggs on your eyes.&lt;/p&gt;
+
+&lt;p&gt;Lisp, today and in this world not another, has &lt;em&gt;exactly one&lt;/em&gt; feature which still distinguishes it from the endless buzz of these insect languages. That feature is seamless language extension by macros.&lt;/p&gt;
+
+&lt;p&gt;So yes, macros are dangerous, and they are hard and they are frightening. They are dangerous and hard and frightening because all powerful magic is dangerous and hard and frightening. They are dangerous because they are a thing which has escaped here from the future and it is the business of the future to be dangerous.&lt;/p&gt;
+
+&lt;p&gt;If macros are too dangerous, too hard and too frightening for you, &lt;em&gt;do not use Lisp&lt;/em&gt; because &lt;em&gt;macros are what Lisp is about&lt;/em&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;This originated as a comment by my friend Zyni. It is reproduced here with her permission.&lt;/p&gt;</description>
+	
+	<pubDate>Sat, 27 Aug 2022 10:12:33 GMT</pubDate>
+</item>
+
+<item>
+	<title>Colin Lupton: Learn Lisp The Hard Way is Back Online</title>
+	<guid isPermaLink="true">https://cjelupton.wordpress.com/2022/08/22/learn-lisp-the-hard-way-is-back-online/</guid>
+	<link>https://cjelupton.wordpress.com/2022/08/22/learn-lisp-the-hard-way-is-back-online/</link>
+	
+	<description>&lt;p&gt;The second draft (in-progress) of Learn Lisp The Hard Way is back online and under active development, now hosted by common-lisp.net and powered by GitBook on GitLab Pages.&lt;/p&gt;
+
+
+
+&lt;p&gt;You can find it at &lt;a href="https://llthw.common-lisp.dev/" rel="nofollow"&gt;https://llthw.common-lisp.dev/&lt;/a&gt;&lt;/p&gt;
+
+
+
+&lt;p&gt;If you would like to show your support for LLTHW, please consider sponsoring me through GitHub Sponsors at: &lt;a href="https://github.com/sponsors/thephoeron" rel="nofollow"&gt;https://github.com/sponsors/thephoeron&lt;/a&gt;&lt;/p&gt;</description>
+	
+	<pubDate>Mon, 22 Aug 2022 21:55:53 GMT</pubDate>
+</item>
+
+<item>
+	<title>Joe Marshall: Playing with graphics</title>
+	<guid isPermaLink="true">http://funcall.blogspot.com/2022/08/playing-with-graphics.html</guid>
+	<link>http://funcall.blogspot.com/2022/08/playing-with-graphics.html</link>
+	
+	<description>&lt;p&gt;I wanted to play with some graphics.  I don't know much about
+  graphics, so I wanted to start with the basics.  I played around
+  with a couple of demos and I found that easiest to get reliably
+  working was SDL2.&lt;/p&gt;
+
+&lt;p&gt;After downloading the SDL binary library and installing the FFI
+  bindings with Quicklisp, I was off and running.  You can find
+  numerous SDL demos and tutorials on line and I tried a number of
+  them.  After I felt confident I decided to try something simple.&lt;/p&gt;
+
+&lt;p&gt;One thing I've noticed about graphics programs is the ubiquity of
+  mutable state.  Everything seems mutable and is freely modified and
+  global variables abound.  As a mostly functional programmer, I am
+  alarmed by this.  I wanted to see where we'd get if we tried to be
+  more functional in our approach and avoid mutable data structures
+  where practical.&lt;/p&gt;
+
+&lt;p&gt;Now the pixels on the screen had best be mutable, and I'm not
+  trying to put a functional abstraction over the drawing primitives.
+  We'll encapsulate the rest of the state in a state machine that is
+  driven by the SDL event loop.  The state machine will keep track of
+  time and the current world.  The current world is simply an
+  immutable list of immutable objects.  The state machine can
+  transition through a &lt;code&gt;render!&lt;/code&gt; phase, where it renders
+  all the objects in the current world to a fresh frame.  It attempts
+  to do this about 75 times a second.  The state machine can also
+  transition through a &lt;code&gt;next-world&lt;/code&gt; phase, where the
+  current world and a delta-&lt;code&gt;t&lt;/code&gt; are used to compute a new
+  version of the world.&lt;/p&gt;
+
+&lt;p&gt;Our &lt;code&gt;run&lt;/code&gt; program will take the initial list of objects.
+  We'll start by initializing SDL, creating a window, and allocating a
+  renderer for that window:&lt;pre&gt;(defun run (initial-world)
+  (sdl2:with-init (:video)
+    (sdl2:with-window (window
+                       :h +window-height+
+                       :w +window-width+
+                       :flags '(:shown))
+      (sdl2:with-renderer (renderer window :index -1 :flags '())
+        ... )))&lt;/pre&gt;&lt;/p&gt;
+
+&lt;p&gt;Now we need the event loop state.  &lt;code&gt;last-ticks&lt;/code&gt;
+  records the value from &lt;code&gt;sdl2:get-ticks&lt;/code&gt; from the last
+  time we processed the &lt;code&gt;:idle&lt;/code&gt; event.  This will be used
+  to compute the elapsed time in ticks.  &lt;code&gt;render-ticker&lt;/code&gt;
+  will record how many ticks have elapsed since the last time we
+  rendered a frame to the screen.  When &lt;code&gt;render-ticker&lt;/code&gt;
+  exceeds a certain amount, we'll call &lt;code&gt;(render!
+  current-world)&lt;/code&gt; and reset the ticker to
+  zero.  &lt;code&gt;title-ticker&lt;/code&gt; will record how many ticks have
+  occurred since the last time the window title was updated.
+  When &lt;code&gt;title-ticker&lt;/code&gt; exceeds a certain amount, we'll
+  call &lt;code&gt;sdl2:set-window-title&lt;/code&gt; to update the window title
+  with some stats.  &lt;code&gt;sim-count&lt;/code&gt; is simply the number of
+  times we've iterated &lt;code&gt;next-world&lt;/code&gt;
+  and &lt;code&gt;frame-count&lt;/code&gt; is the number of times we've
+  called &lt;code&gt;render!&lt;/code&gt;.  These are reset to zero every time we
+  refresh the window title, so we'll have the frames per second and
+  the world steps per second in the window title.&lt;/p&gt;
+
+&lt;pre&gt;        (let ((last-ticks 0)
+              (render-ticker 0)
+              (title-ticker 0)
+              (sim-count 0)
+              (frame-count 0)
+              (world initial-world))
+
+          (flet ((title-tick! (dticks)
+                   (incf title-ticker dticks)
+                   (when (&amp;gt;= title-ticker 1000)
+                     (decf title-ticker 1000)
+                     (sdl2:set-window-title window (format nil "Sim rate: ~d, Frame rate: ~d" sim-count frame-count))
+                     (setq sim-count 0)
+                     (setq frame-count 0)))
+
+                 (world-tick! (dticks)
+                   (incf sim-count)
+                   (setq world (next-world world (/ dticks 1000))))
+
+                 (render-tick! (dticks)
+                   (incf render-ticker dticks)
+                   (when (&amp;gt;= render-ticker 13)
+                     (incf frame-count)
+                     (decf render-ticker 13)
+                     (render-world! renderer world))))
+&lt;/pre&gt;
+
+&lt;p&gt;Now we can run the event loop.  The idle event is where the action
+  happens:
+  &lt;pre&gt;
+          (sdl2:with-event-loop (:method :poll)
+
+              (:idle ()
+                     (let ((this-ticks (sdl2:get-ticks)))
+                       (if (= this-ticks last-ticks)
+                           (sdl2:delay 1)
+                           (let ((dticks (- this-ticks last-ticks)))
+                             (setq last-ticks this-ticks)
+                             (title-tick! dticks)
+                             (world-tick! dticks)
+                             (render-tick! dticks)))))
+
+              (:keydown (:keysym keysym)
+                        (case (sdl2:scancode keysym)
+                          (:scancode-escape (sdl2:push-quit-event))
+                          (:scancode-x      (sdl2:push-quit-event))))
+
+              (:quit () t))&lt;/pre&gt;&lt;/p&gt;
+
+&lt;p&gt;Now that's a bunch of state, but it's more or less under control
+  because what we have is a state machine and the state variables
+  aren't accessible to anything.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;render-world!&lt;/code&gt; is straightforward.  It clears the
+  renderer, calls &lt;code&gt;render!&lt;/code&gt; on every object in the world,
+  and presents the renderer for display.&lt;pre&gt;
+(defun render-world! (renderer world)
+  (sdl2:set-render-draw-color renderer #x00 #x00 #x00 #xFF)
+  (sdl2:render-clear renderer)
+  (mapc (lambda (object) (render! renderer object)) world)
+  (sdl2:render-present renderer)
+  )&lt;/pre&gt;&lt;/p&gt;
+  
+&lt;p&gt;&lt;code&gt;next-world&lt;/code&gt; is a function that maps the current world
+  to the next.  It basically calls &lt;code&gt;next&lt;/code&gt; on each object in
+  the world and accumulate the results.  We want objects to be able to
+  go away, so if &lt;code&gt;(next &lt;i&gt;object&lt;/i&gt;)&lt;/code&gt;
+  returns &lt;code&gt;nil&lt;/code&gt;, we don't accumulate anything in the new
+  world.  If &lt;code&gt;next&lt;/code&gt; returns the object unchanged, it will
+  be accumulated unchanged in the next
+  world. &lt;code&gt;(next &lt;i&gt;object&lt;/i&gt;)&lt;/code&gt; returns a new version of an
+  object to simulate an update to the object.  We want to be able to
+  increase the amount of objects, so we
+  allow &lt;code&gt;(next &lt;i&gt;object&lt;/i&gt;)&lt;/code&gt; to return a list of objects
+  to be accumulated.&lt;/p&gt;
+
+&lt;pre&gt;(defun next-world (previous-world dt)
+  (fold-left
+   (lambda (items item)
+     (let ((more (next item dt)))
+       (cond ((null more) items)
+             ((consp more) (append more items))
+             (t (cons more items)))))
+   '()
+   previous-world))
+&lt;/pre&gt;
+&lt;p&gt;We'll start with a user-controlled player.
+  &lt;pre&gt;
+(defclass player ()
+  ((x :initarg :x
+      :reader get-x)
+   (y :initarg :y
+      :reader get-y)))&lt;/pre&gt;&lt;/p&gt;
+  
+&lt;p&gt;Everything that is to be displayed needs a &lt;code&gt;render!&lt;/code&gt;
+  method.  This one just draws a little green triangle facing up.&lt;pre&gt;
+(defmethod render! (renderer (player player))
+  (let ((x (floor (get-x player)))
+        (y (floor (get-y player))))
+    (sdl2:set-render-draw-color renderer #x00 #xFF #x00 #xFF)
+    (sdl2:render-draw-line renderer (- x 8) (+ y 8) (+ x 8) (+ y 8))
+    (sdl2:render-draw-line renderer (- x 8) (+ y 8) (- x 1) (- y 16))
+    (sdl2:render-draw-line renderer (+ x 8) (+ y 8) x (- y 16))
+    (sdl2:render-draw-point renderer x y)
+    ))&lt;/pre&gt;&lt;/p&gt;
+  
+&lt;p&gt;The &lt;code&gt;next&lt;/code&gt; method computes the player in the next
+  world:&lt;pre&gt;
+
+(defun x-input ()
+  (- (if (sdl2:keyboard-state-p :scancode-right)
+         1
+         0)
+     (if (sdl2:keyboard-state-p :scancode-left)
+         1
+         0)))
+
+(defun y-input ()
+  (- (if (sdl2:keyboard-state-p :scancode-down)
+         1
+         0)
+     (if (sdl2:keyboard-state-p :scancode-up)
+         1
+         0)))
+
+(defparameter +player-speed+ 200.0) ;; pixels per second
+
+(defmethod next ((player player) dt)
+  (let ((new-x (max 8  (min (- +window-width+ 8)
+                            (+ (get-x player)
+                               (* (x-input) +player-speed+ dt)))))
+        (new-y (max 16 (min (- +window-height+ 8)
+                            (+ (get-y player)
+                               (* (y-input) +player-speed+ dt))))))
+    (make-instance 'player :x new-x :y new-y)))&lt;/pre&gt;
+
+&lt;p&gt;Once we've defined a &lt;code&gt;render!&lt;/code&gt; method and
+  a &lt;code&gt;next&lt;/code&gt; method, we're ready to go.  If we
+  call &lt;code&gt;run&lt;/code&gt; on a list containing a player object, we'll
+  have our little player on the screen controllable with the arrow
+  keys.&lt;/p&gt;
+
+&lt;p&gt;An enemy ship can be defined. &lt;pre&gt;(defclass enemy ()
+  ((x :initarg :x :reader get-x)
+   (y :initarg :y :reader get-y)
+   (dx :initarg :dx :reader get-dx)
+   (dy :initarg :dy :reader get-dy)))
+
+(defmethod next ((enemy enemy) dt)
+  (let ((new-x (+ (get-x enemy) (* (get-dx enemy) dt)))
+        (new-y (+ (get-y enemy) (* (get-dy enemy) dt))))
+    (when (and (&amp;gt;= new-x 8)
+               (&amp;lt; new-x (+ +window-width+ 8))
+               (&amp;gt;= new-y 8)
+               (&amp;lt; new-y (- +window-height+ 16)))
+      (make-instance 'enemy
+                     :x new-x
+                     :y new-y
+                     :dx (get-dx enemy)
+                     :dy (get-dy enemy)))))
+
+;;; Render method omitted&lt;/pre&gt;&lt;/p&gt;
+&lt;p&gt;As given, enemy ships will drift at constant speed until they run
+  off the screen.  We'd like to replenish the supply, so we'll make an
+  enemy spawner:&lt;pre&gt;(defclass enemy-spawner ()
+  ((timer :initarg :timer :initform 0 :reader get-timer)))
+
+(defmethod next ((spawner enemy-spawner) dt)
+  (let ((new-time (- (get-timer spawner) dt)))
+    (if (&amp;gt; new-time 0)
+        (make-instance 'enemy-spawner :timer new-time)
+        (list (make-instance 'enemy-spawner :timer (+ 1 (random 4)))
+              (make-instance 'enemy :x (random (+ (- +window-width+ 32) 16))
+                                    :y 16
+                                    :dx (- 25 (random 50))
+                                    :dy (+ (random 100) 50))))))
+
+(defmethod render! (renderer (enemy-spawner enemy-spawner))
+  nil)&lt;/pre&gt;
+The &lt;code&gt;render!&lt;/code&gt; method doesn't do anything so a spawner
+  doesn't have an image.  It simply has a timer.  To compute the next
+  spawner, we subtract &lt;code&gt;dt&lt;/code&gt; and create a new spawner with
+  the reduced amount of time.  If that's not a positive amount of
+  time, though, we create two objects:  a new spawner with somewhere
+  between 1 and 5 seconds time and a new enemy ship.&lt;/p&gt;
+
+&lt;p&gt;We'll modify our player to allow him to shoot at the enemy:&lt;pre&gt;
+(defclass player ()
+  ((x :initarg :x
+      :reader get-x)
+   (y :initarg :y
+      :reader get-y)
+   (fire-cycle :initarg :fire-cycle
+               :initform 0
+               :reader get-fire-cycle)))
+
+(defmethod next ((player player) dt)
+  (let ((new-x (limit 8 (- +window-width+ 8) (+ (get-x player) (* (x-input) +player-speed+ dt))))
+        (new-y (limit 16 (- +window-height+ 8) (+ (get-y player) (* (y-input) +player-speed+ dt))))
+        (next-fire-cycle (- (get-fire-cycle player) dt)))
+    (if (and (sdl2:keyboard-state-p :scancode-space)
+             (&amp;lt; next-fire-cycle 0))
+        (list
+         (make-instance 'player
+                        :x new-x
+                        :y new-y
+                        :fire-cycle .1)
+         (make-instance 'bullet
+                               :x (- (get-x player) 8)
+                               :y (- (get-y player) 16)
+                               :dx 0
+                               :dy (- +bullet-speed+))
+         (make-instance 'bullet
+                               :x (+ (get-x player) 8)
+                               :y (- (get-y player) 16)
+                               :dx 0
+                               :dy (- +bullet-speed+)))
+        (make-instance 'player
+                       :x new-x
+                       :y new-y
+                       :fire-cycle next-fire-cycle))))&lt;/pre&gt;
+
+&lt;p&gt;A bullet is a simple moving object:&lt;pre&gt;(defclass bullet ()
+  ((x :initarg :x :reader get-x)
+   (y :initarg :y :reader get-y)
+   (dx :initarg :dx :reader get-dx)
+   (dy :initarg :dy :reader get-dy)))
+
+(defmethod next ((bullet bullet) dt)
+  (let ((new-x (+ (get-x bullet) (* (get-dx bullet) dt)))
+        (new-y (+ (get-y bullet) (* (get-dy bullet) dt))))
+    (when (and (&amp;gt;= new-x 0)
+               (&amp;lt; new-x +window-width+)
+               (&amp;gt;= new-y 0)
+               (&amp;lt; new-y +window-height+))
+      (make-instance 'bullet
+                     :x new-x
+                     :y new-y
+                     :dx (get-dx bullet)
+                     :dy (get-dy bullet)))))&lt;/pre&gt;
+
+&lt;p&gt;At this point we can move around the screen and shoot at enemies
+  that spawn periodically.  The problem is that the bullets go right
+  through the enemy.  We need to handle object collisions.  We'll
+  modify the &lt;code&gt;next-world&lt;/code&gt; function.  As it loops over the
+  objects in the world, it will perform an inner loop that checks for
+  collisions with other objects.  If two objects collide, a function
+  is called to get the collision results and those results are added
+  to the list of objects in the world.  If an object doesn't collide
+  with anything, the &lt;code&gt;next&lt;/code&gt; method is called to get the
+  next version of the object.&lt;pre&gt;(defun next-world (previous-world dt)
+  (let outer ((tail previous-world)
+              (next-world '()))
+    (cond ((consp tail)
+           (let ((this (car tail)))
+             (let inner ((those (cdr tail)))
+               (cond ((consp those)
+                      (let ((that (car those))
+                            (others (cdr those)))
+                        (if (collides? this that)
+                            (outer (append (collide this that) (delete that (cdr tail)))
+                                   next-world)
+                            (inner others))))
+                     ((null those)
+                      (outer (cdr tail)
+                             (let ((more (next this dt)))
+                               (cond ((consp more) (append more next-world))
+                                     ((null more) next-world)
+                                     (t (cons more next-world))))))
+                     (t (error "Bad list."))))))
+          ((null tail) next-world)
+          (t (error "Bad list.")))))&lt;/pre&gt;
+
+&lt;p&gt;We define &lt;code&gt;collides?&lt;/code&gt; as a generic function that
+  returns &lt;code&gt;nil&lt;/code&gt; by default&lt;pre&gt;(defgeneric collides? (this that)
+  (:method ((this t) (that t)) nil)
+  )&lt;/pre&gt;so that most objects don't collide.  In the case where
+  something &lt;em&gt;does&lt;/em&gt; collide, we'll define &lt;code&gt;collide&lt;/code&gt;
+  as a generic function that returns &lt;code&gt;nil&lt;/code&gt; by default&lt;pre&gt;(defgeneric collide (this that)
+  (:method ((this t) (that t)) nil)
+  )&lt;/pre&gt;so when two objects collide, they simply disappear.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;collides?&lt;/code&gt; will be called on pairs of objects in no
+  particular order, so method pairs will be needed to handle both
+  orders.  We'll define &lt;code&gt;collides?&lt;/code&gt; methods on bullets and
+  enemies that checks if the bullet is within the bounding box of the enemy:&lt;pre&gt;(defmethod collides? ((this bullet) (that enemy))
+  (and (&amp;gt; (get-x this) (- (get-x that) 8))
+       (&amp;lt; (get-x this) (+ (get-x that) 8))
+       (&amp;gt; (get-y this) (- (get-y that) 8))
+       (&amp;lt; (get-y this) (+ (get-y that) 8))))
+
+(defmethod collides? ((this enemy) (that bullet))
+  (collides? that this))&lt;/pre&gt;
+
+&lt;p&gt;At this point, we can shoot enemy ships.  The default method
+  for &lt;code&gt;collide&lt;/code&gt; between an enemy and a bullet
+  returns &lt;code&gt;nil&lt;/code&gt; so the enemy and the bullet simply
+  disappear.  If we were fancy, we could arrange for it to return an
+  explosion object or several debris objects.&lt;/p&gt;
+
+&lt;p&gt;It would be nice to keep a tally of the number of
+  enemy ships we have shot.  We don't have to add any extra machinery
+  for this.  We create a &lt;code&gt;score&lt;/code&gt; class and a point class:&lt;pre&gt;(defclass score ()
+  ((value :initarg :value
+          :reader get-value)))
+
+(defmethod next ((score score) dt) score)
+
+;;; Render method prints score on screen.
+
+(defclass point ()
+  ((value :initarg :value
+          :reader get-value)))
+
+(defmethod next ((point point) dt) point)
+
+(defmethod render! (renderer (point point)) nil)&lt;/pre&gt;
+Scores and points are immutable objects without positions, but we'll
+define methods so that when a score and a point collide, the result is
+a higher score.&lt;pre&gt;(defmethod collides? ((this point) (that score)) t)
+(defmethod collides? ((this score) (that point)) t)
+
+(defmethod collide ((this point) (that score))
+  (list (make-instance 'score
+                       :font (get-font that)
+                       :value (+ (get-value this) (get-value that)))))
+
+(defmethod collide ((this score) (that point))
+  (collide that this))&lt;/pre&gt;
+Now we'll define a bullet colliding with an enemy to produce a point:&lt;pre&gt;(defmethod collide ((this bullet) (that enemy))
+  (list (make-instance 'point :value 1)
+        ;; add explosion object here
+        ))
+
+(defmethod collide ((this enemy) (that bullet))
+  (collide that this))&lt;/pre&gt;
+So when you shoot an enemy, the bullet and enemy disappear to be
+  replaced by a point.  On the next update, the point will collide
+  with the score to be replaced with an updated score.&lt;/p&gt;
+
+&lt;p&gt;At this point we've got a little demo game where we can fly a
+  ship around and shoot enemies and a running score is kept.  The
+  world model is immutable and worlds are functions of previous
+  worlds.  I'll call it a successful proof of concept.&lt;/p&gt;
+
+&lt;p&gt;But did this buy us anything?  We don't have mutable state &lt;i&gt;per
+    se&lt;/i&gt;, but we've kind of cheated.  When we create new versions of
+    an object, each version is immutable, but the sequence of versions
+    taken as a whole seem to be evolving over time.  For example,
+    consider the score.  At each time step, there is an immutable
+    score object, but over time what is considered the current score
+  changes.  We've eliminated the direct problems of mutation, but
+    we've introduced the problem of keeping track of what series of
+  immutable versions correspond to a single evolving instance.&lt;/p&gt;
+
+&lt;p&gt;In this small example, we're not keeping track of the evolving
+  objects.  For instance, each bullet, as it is updated from step to
+  step, is actually created anew at its new position on each step.  The
+  old bullet instance is dropped and the new instance really has no
+  idea how it got there.  Bullets are such simple objects that this
+  doesn't matter, but the current score is different.  It makes sense
+  for there to be a singleton score object that increases over time,
+  but we haven't built that in to our model.  Instead, we've designed
+  a set of collision interactions that drive the score.&lt;/p&gt;
+
+&lt;p&gt;We've eliminated the direct mutable state in our objects and our
+  world, but sometimes we want to model stateful objects.  We
+  therefore create objects that represent state transitions
+  (&lt;i&gt;e.g.&lt;/i&gt; points) and then use the collision mechanism to combine
+  the transition objects with the objects that represent physical
+  entities.  That seems a bit convoluted, and I don't think it will
+  scale.&lt;/p&gt;
+
+&lt;p&gt;On the other hand, we do gain the immediate benefits of the world
+  and the objects being immutable.  Saving and restoring a world is
+  trivial.  Reasoning about objects at each update is easy because the
+  objects don't change, but we now have to reason about how objects
+  appear to change in the long run.&lt;/p&gt;
+
+&lt;p&gt;The tradeoff of immutable objects is increased allocation.  But
+  although a lot more consing is happening, most of it can be quickly
+  reclaimed by the generational collector, so noticable GC pauses are
+  infrequent.  I haven't measured the performance, but it is certainly
+  adequate for the little example I wrote.  If you had a mechanism to
+  reason about the objects as linear types (Sufficiently Smart
+  Compiler&lt;sup&gt;&amp;trade;&lt;/sup&gt;), you could determine when you can update
+  objects in place and avoid reallocating.&lt;/p&gt;
+
+&lt;p&gt;The world model, simply a list of objects, is flexible, but not
+  well structured.  For instance, the current score and the bullets
+  are among the elements mixed together in this list.  You'd have to
+  search this list to find specific elements or filter this list to
+  find elements of a certain type.&lt;/p&gt;
+
+&lt;p&gt;The simple collision model is &lt;i&gt;O(n&lt;sup&gt;2&lt;/sup&gt;)&lt;/i&gt;, so it can't
+  handle a ton of objects.  A more sophisticated world model would
+  be needed to keep track of different classes of collidable objects
+  to avoid the &lt;i&gt;O(n&lt;sup&gt;2&lt;/sup&gt;)&lt;/i&gt; search.  For example, if
+  bullets were kept separately, we could avoid checking if they
+  collide with each other.&lt;/p&gt;
+
+&lt;p&gt;The point of this exercise was to play with graphics and see what
+  you can do without the mutable state that is alarmingly ubiquitous.
+  It turns out that you can go pretty far, but it's kind of strange.&lt;/p&gt;</description>
+	
+	<pubDate>Wed, 17 Aug 2022 16:45:00 GMT</pubDate>
+</item>
+
+<item>
+	<title>Kaveh Kardan: 41. World Building And Alternate Reality Common Lisp</title>
+	<guid isPermaLink="true">https://kaveh808.medium.com/41-world-building-and-alternate-reality-common-lisp-ca9fbc619a8c?source=rss-a1ddb30a4a53------2</guid>
+	<link>https://kaveh808.medium.com/41-world-building-and-alternate-reality-common-lisp-ca9fbc619a8c?source=rss-a1ddb30a4a53------2</link>
+	
+	<description>&lt;img alt="" src="https://cdn-images-1.medium.com/max/1024/1*KBS3WErhozb8G0jOpixoVA.png" /&gt;&lt;p&gt;Time for another Interlude, wherein I take a break from my career journey and reflect on what we're doing. I say we, not because I have been taken by delusions of royalty, but because there is more than just me involved now, as you will find out below, in the second half of this&amp;nbsp;post.&lt;/p&gt;&lt;p&gt;It occurred to me the other day that I am developing alternate reality software. And what, I hear you cry, do I mean by&amp;nbsp;that?&lt;/p&gt;&lt;p&gt;I have been a science fiction fan ever since I can remember. I was a nerdy kid who watched "Star Trek (TOS)", "Lost in Space", and "Land of the Giants" on TV. I read all the science fiction I could get my hands on. Later in life I even wrote stories for SF movies, and created an SF TV show which was never picked up. If I were an optimist, I would say "has not yet been picked&amp;nbsp;up."&lt;/p&gt;&lt;p&gt;One of the subgenres of science fiction is alternate reality (aka alternate history), where history took a different turn from our world. The most famous example is probably Philip K Dick's novel "The Man in the High Castle", where the Axis powers are victorious in World War II and partition the&amp;nbsp;USA.&lt;/p&gt;&lt;p&gt;From a purely practical point of view, the software we are developing does not make much sense. Common Lisp is a niche language, with very weak support for graphics and graphical user interfaces, and mediocre tooling at&amp;nbsp;best.&lt;/p&gt;&lt;p&gt;No one has really tried doing serious computer graphics and animation with Common Lisp in the past 30 years. It may be seen by some as a quixotic quest at best. But in an alternate reality, one in which Common Lisp retained its popularity and remained a mainstream language, this development effort would make perfect&amp;nbsp;sense.&lt;/p&gt;&lt;p&gt;For me, the most fun part of writing science fiction is the world building. Pure imagination running free. So let's engage in a few scenarios in which Common Lisp could be a mainstream language&amp;nbsp;today.&lt;/p&gt;&lt;p&gt;Scenario one: the US does not get involved in the Vietnam war, there is no budget deficit, and ARPA funding for computer science academic research is not cut. Well-funded Lisp-based projects continue and&amp;nbsp;prosper.&lt;/p&gt;&lt;p&gt;Scenario two: AT&amp;amp;T does not sign a decree with the US government which forces Bell Labs to give away the UNIX source code for free. Instead AT&amp;amp;T tries to sell UNIX as a commercial operating system, becoming just one of many such vendors. Unix's popularity (and therefore that of C/C++) is curtailed and it does not take over the world. Lisp Machines and a variety of other operating systems survive in this ecosystem.&lt;/p&gt;&lt;p&gt;Scenario three: the government decides that instead of inventing a new language known as ADA, it will require Common Lisp as the standard language for government and military work. Common Lisp becomes a mainstay of government contract work and ensures a steady supply of funding and Lisp development opportunities. (Yeah, I know, this one is kind of out&amp;nbsp;there.)&lt;/p&gt;&lt;p&gt;In these scenarios (and if you buy me a coffee I can come up with a half a dozen other ones), Lisp trudges along nicely, perhaps along with Fortran, Cobol, and&amp;nbsp;C/C++.&lt;/p&gt;&lt;p&gt;That is the software we are writing. The one that comes out of these timelines. One where people naturally expect their software to be extensible and customizable and programmable, and not regularly crash due to things like buffer overflows.&lt;/p&gt;&lt;p&gt;I can dream. It's one of the perks of being a science-fiction fan.&lt;/p&gt;&lt;img alt="" src="https://cdn-images-1.medium.com/max/1024/1*BxL2FYrTk66Ah4YgJm8ZRA.png" /&gt;&lt;h3&gt;Code &amp;amp;&amp;nbsp;Design&lt;/h3&gt;&lt;p&gt;When I start a project, I make a &amp;quot;to do&amp;quot; list. This list always grows much faster than I can actually get the enumerated items on it accomplished. I use it to keep track of features, ideas, or even just vague notions of what I might want to do or work on. When I am done implementing one of these items, it will go on the &amp;quot;done&amp;quot; section. The listing above is that section for my graphics project, and represents several months worth of&amp;nbsp;work.&lt;/p&gt;&lt;p&gt;The to do list remains well-populated and represents a lot of work for us. Yes, us. I have gone ahead and publicly announced this system as an open source project. As a result, a small team is gathering around and we are planning the future development of the&amp;nbsp;system.&lt;/p&gt;&lt;p&gt;It was always my hope that this project would grow beyond a personal endeavor of mine into something that could have some real world impact. Not sure what that impact might be yet, but the first step is to get into the hands of people, both artists and developers, who can use it. So our first task is to port the system beyond the Macintosh, to Linux and Windows platforms. Currently work in progress.&lt;/p&gt;&lt;p&gt;If I were to be honest, and that is something I try to do in this blog (otherwise what is the point), I would have to admit that I am equal parts nervous and excited. I had kept putting off making the open-source announcement, but then I remembered a quote I read somewhere to the effect that the biggest mistake we can make is to wait until we think we are ready. So I wondered what I was waiting for. I am not getting any younger. Just get the ball rolling and see what&amp;nbsp;happens.&lt;/p&gt;&lt;p&gt;For those who are geeky enough to want to see the project on Github, &lt;a href="https://github.com/kaveh808/kons-9"&gt;&lt;strong&gt;here is a&amp;nbsp;link&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;&lt;img src="https://medium.com/_/stat?event=post.clientViewed&amp;referrerSource=full_rss&amp;postId=ca9fbc619a8c" width="1" height="1" alt="" /&gt;</description>
+	
+	<pubDate>Tue, 16 Aug 2022 03:05:45 GMT</pubDate>
+</item>
+
+<item>
+	<title>John Jacobsen: Adding Tail Call Optimization to A Lisp Written in Go</title>
+	<guid isPermaLink="true">http://johnj.com/posts/tco/</guid>
+	<link>http://johnj.com/posts/tco/</link>
+	
+	<description>&lt;p&gt;
+
+
+
+
+&lt;a href="http://johnj.com/swirl5.jpg"&gt;&lt;img class="resize" src="http://johnj.com/swirl5_hud6892c7a4b5f63fe222a2f9f639f3d13_1231490_700x0_resize_q75_box.jpg" /&gt;&lt;/a&gt;
+
+&lt;/p&gt;
+&lt;p&gt;
+The last few days have been devoted to improving &lt;a href="https://github.com/eigenhombre/l1/"&gt;&lt;code class="verbatim"&gt;l1&lt;/code&gt;&lt;/a&gt;, the homegrown lisp I
+&lt;a href="http://johnj.com/posts/l1/"&gt;wrote about&lt;/a&gt; earlier this year.  A number of changes have landed in the
+last week:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Implemented &lt;a href="https://github.com/eigenhombre/l1/issues/36"&gt;&lt;code class="verbatim"&gt;let&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://github.com/eigenhombre/l1/issues/42"&gt;&lt;code class="verbatim"&gt;defn&lt;/code&gt;&lt;/a&gt; and sugar for &lt;a href="https://github.com/eigenhombre/l1/issues/38"&gt;quote&lt;/a&gt;;&lt;/li&gt;
+&lt;li&gt;Figured out &lt;a href="https://github.com/eigenhombre/l1#emacs-integration"&gt;basic REPL integration&lt;/a&gt; with Emacs;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/eigenhombre/l1/issues/27"&gt;Added numeric comparison operators&lt;/a&gt;;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/eigenhombre/l1/issues/33"&gt;Reviewed my Minimum Viable Repo&lt;/a&gt; checklist for this project;&lt;/li&gt;
+&lt;li&gt;Fixed &lt;a href="https://github.com/eigenhombre/l1/issues?q=is%3Aissue+is%3Aclosed+sort%3Aupdated-desc+label%3Abug"&gt;four bugs&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I also implemented the bulk of the automated tests &lt;a href="https://github.com/eigenhombre/l1/blob/master/tests.l1"&gt;in the language
+itself&lt;/a&gt;.  This was a decisive step forward in both ease of creating new
+tests and confidence that the language was approaching something usable.&lt;/p&gt;
+&lt;p&gt;
+The work I'm happiest with, though, because it taught me the most, was implementing
+&lt;a href="https://en.wikipedia.org/wiki/Tail_call"&gt;tail call optimization&lt;/a&gt; (TCO) in the language, which the rest of this post will be about.&lt;/p&gt;
+&lt;div id="outline-container-headline-1" class="outline-2"&gt;
+&lt;h2 id="headline-1"&gt;
+Motivation
+&lt;/h2&gt;
+&lt;div id="outline-text-headline-1" class="outline-text-2"&gt;
+&lt;p&gt;
+The need for some form of TCO became clear as I started to write more small programs in &lt;code class="verbatim"&gt;l1&lt;/code&gt;.
+Perhaps the simplest example is one that sums all the natural numbers up to $n$:&lt;/p&gt;
+&lt;div class="src src-text"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0"&gt;&lt;code class="language-text"&gt;&lt;span&gt;&lt;span&gt;(defn sum-to-acc (n acc)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;  (cond ((zero? n) acc)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;        (t (sum-to-acc (- n 1) (+ n acc)))))
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;(defn sum-to (n)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;  (sum-to-acc n 0))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;
+Calling &lt;code class="verbatim"&gt;sum-to&lt;/code&gt; for small $n$ worked fine:&lt;/p&gt;
+&lt;div class="src src-text"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0"&gt;&lt;code class="language-text"&gt;&lt;span&gt;&lt;span&gt;(sum-to 100)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;;;=&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;5050&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;
+However, larger $n$ blew up spectacularly:&lt;/p&gt;
+&lt;div class="src src-text"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0"&gt;&lt;code class="language-text"&gt;&lt;span&gt;&lt;span&gt;(sum-to (* 1000 1000))
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;;;=&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;runtime: goroutine stack exceeds 1000000000-byte limit
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;runtime: sp=0x14020500360 stack=[0x14020500000, 0x14040500000]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;fatal error: stack overflow
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;runtime stack:
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;runtime.throw({0x10289aa2b?, 0x10294ddc0?})
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;	/opt/homebrew/Cellar/go/1.18.3/libexec/src/runtime/panic.go:992 +0x50
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;runtime.newstack()
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;	/opt/homebrew/Cellar/go/1.18.3/libexec/src/runtime/stack.go:1101 +0x46c
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;runtime.morestack()
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;	/opt/homebrew/Cellar/go/1.18.3/libexec/src/runtime/asm_arm64.s:314 +0x70
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;goroutine 1 [running]:
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;strings.(*Reader).ReadByte(0x1401c2820e0?)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;	/opt/homebrew/Cellar/go/1.18.3/libexec/src/strings/reader.go:66 +0x98 fp=0x14020500360 sp=0x14020500360 pc=0x102883348
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;math/big.nat.scan({0x0, 0x1401c2820e0?, 0x0}, {0x1028dc7c8, 0x1401c2820e0}, 0xa, 0x0)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;	/opt/homebrew/Cellar/go/1.18.3/libexec/src/math/big/natconv.go:126 +0x80 fp=0x14020500430 sp=0x14020500360 pc=0x10288b1e0
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;;; ...&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;
+This happens, of course, because &lt;code class="verbatim"&gt;sum-to-acc&lt;/code&gt; calls itself a million times,
+each time storing a copy of its local bindings on the stack, which
+eventually consumes all the space on the stack.&lt;/p&gt;
+&lt;p&gt;
+Getting simple recursive functions like this to work for large $n$ is
+especially important because &lt;code class="verbatim"&gt;l1&lt;/code&gt; doesn't have loops (yet)!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-headline-2" class="outline-2"&gt;
+&lt;h2 id="headline-2"&gt;
+The Optimization
+&lt;/h2&gt;
+&lt;div id="outline-text-headline-2" class="outline-text-2"&gt;
+&lt;p&gt;
+The solution is hinted at already in my test case.  Note that I did
+not write &lt;code class="verbatim"&gt;sum-to&lt;/code&gt; as a single recursive function, as follows:&lt;/p&gt;
+&lt;div class="src src-text"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0"&gt;&lt;code class="language-text"&gt;&lt;span&gt;&lt;span&gt;(defn sum-to-notail (n)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;  (cond ((zero? n) 0)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;        (t (+ n (sum-to-notail (- n 1))))))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;
+While this function looks slightly simpler, it is harder for a
+compiler or interpreter to optimize.  The difference is that, whereas
+&lt;code class="verbatim"&gt;sum-to-notail&lt;/code&gt; does some work after calling itself (by adding &lt;code class="verbatim"&gt;n&lt;/code&gt; to
+the result), &lt;code class="verbatim"&gt;sum-to-acc&lt;/code&gt; calls itself from the &lt;em&gt;tail position&lt;/em&gt;; that is,
+the function &lt;em&gt;returns immediately after calling itself&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;
+People have &lt;a href="https://dspace.mit.edu/handle/1721.1/5753"&gt;long realized&lt;/a&gt; that function calls from the tail position
+can be replaced by updating the return address and then jumping
+directly to the the new function without adding new information to the
+stack.  This is something I had heard about for years and used in
+various "functional" languages, without ever really implementing
+myself (and therefore fully understanding).  It's an easy thing to take for
+granted without knowing anything about how it's actually implemented
+under the hood.  The failure of &lt;code class="verbatim"&gt;sum-to-acc&lt;/code&gt; and similar recursive
+functions, described above, meant I would have to learn.&lt;/p&gt;
+&lt;p&gt;
+Two very different blog posts were helpful to me in pointing the way
+forward: &lt;a href="https://www.geoffreylitt.com/2018/01/15/adding-tail-calls-optimization-to-a-lisp-interpreter.html"&gt;Adding tail call optimization to a Lisp interpreter in Ruby&lt;/a&gt;,
+and &lt;a href="https://eklitzke.org/how-tail-call-optimization-works"&gt;How Tail Call Optimization Works&lt;/a&gt;.  The posts focus on very
+different languages (Ruby vs. C / assembler), but they each revolve
+around what are effectively &lt;code class="verbatim"&gt;GOTO&lt;/code&gt; statements.  I'm old enough to
+remember BASIC and the pernicious &lt;code class="verbatim"&gt;GOTO&lt;/code&gt; statement leading to
+"spaghetti code."  I doubt I've ever used a &lt;code class="verbatim"&gt;GOTO&lt;/code&gt; statement in
+production code, whose use in modern programming languages fell out of
+favor in the aftermath of Dijkstra's famous &lt;a href="https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf"&gt;Go To Statement Considered
+Harmful&lt;/a&gt; paper.  But the ability to transfer control to another part of
+your program without invoking a function call is key to the
+optimization.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-headline-3" class="outline-2"&gt;
+&lt;h2 id="headline-3"&gt;
+The Approach
+&lt;/h2&gt;
+&lt;div id="outline-text-headline-3" class="outline-text-2"&gt;
+&lt;p&gt;
+Since the strategy is general, let's lose all the parentheses for a
+moment and rewrite &lt;code class="verbatim"&gt;sum-to-acc&lt;/code&gt; in language-agnostic pseudo-code:&lt;/p&gt;
+&lt;div class="src src-text"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0"&gt;&lt;code class="language-text"&gt;&lt;span&gt;&lt;span&gt;function sum-to-acc(n sum)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;   if n == 0, then return sum
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;   return sum-to-acc(n - 1, n + sum)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;
+In most languages (without TCO), when this function is called, the
+values of &lt;code class="verbatim"&gt;n&lt;/code&gt; and &lt;code class="verbatim"&gt;sum&lt;/code&gt;, as well as the return address, will be put on
+the stack, whose evolution looks something like the following.&lt;sup class="footnote-reference"&gt;&lt;a id="footnote-reference-1" href="#footnote-1"&gt;1&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
+&lt;div class="src src-text"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0"&gt;&lt;code class="language-text"&gt;&lt;span&gt;&lt;span&gt; first invocation: [n=5, sum=0,  ret=sum-to:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;second invocation: [n=4, sum=5,  ret=sum-to-acc:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;                   [n=5, sum=0,  ret=sum-to:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt; third invocation: [n=3, sum=9,  ret=sum-to-acc:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;                   [n=4, sum=5,  ret=sum-to-acc:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;                   [n=5, sum=0,  ret=sum-to:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;fourth invocation: [n=2, sum=12, ret=sum-to-acc:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;                   [n=3, sum=9,  ret=sum-to-acc:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;                   [n=4, sum=5,  ret=sum-to-acc:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;                   [n=5, sum=0,  ret=sum-to:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt; fifth invocation: [n=1, sum=14, ret=sum-to-acc:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;                   [n=2, sum=12, ret=sum-to-acc:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;                   [n=3, sum=9,  ret=sum-to-acc:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;                   [n=4, sum=5,  ret=sum-to-acc:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;                   [n=5, sum=0,  ret=sum-to:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt; sixth invocation: [n=0, sum=15, ret=sum-to-acc:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;                   [n=1, sum=14, ret=sum-to-acc:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;                   [n=2, sum=12, ret=sum-to-acc:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;                   [n=3, sum=9,  ret=sum-to-acc:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;                   [n=4, sum=5,  ret=sum-to-acc:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;                   [n=5, sum=0,  ret=sum-to:...]&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;
+At the sixth invocation, our terminating condition is reached, and 15
+is returned, with all the pending stack frames popped off the stack.&lt;/p&gt;
+&lt;p&gt;
+With TCO, the implementation looks more like the following:&lt;/p&gt;
+&lt;div class="src src-text"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0"&gt;&lt;code class="language-text"&gt;&lt;span&gt;&lt;span&gt;function sum-to-acc(n sum)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;TOP:
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;   if n == 0, then return sum
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;   n = n - 1
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;   sum = sum + n
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;   GOTO TOP&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;
+as a result, the evolution of the stack looks as follows:&lt;/p&gt;
+&lt;div class="src src-text"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0"&gt;&lt;code class="language-text"&gt;&lt;span&gt;&lt;span&gt; first invocation: [n=5, sum=0, ret=sum-to:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;second invocation: [n=4, sum=5, ret=sum-to:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt; third invocation: [n=3, sum=9, ret=sum-to:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;fourth invocation: [n=2, sum=12, ret=sum-to:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt; fifth invocation: [n=1, sum=14, ret=sum-to:...]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt; sixth invocation: [n=0, sum=15, ret=sum-to:...]&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;
+All those extra stack frames are gone: recursion has turned into a form of iteration.&lt;/p&gt;
+&lt;p&gt;
+Implementing TCO, then, has two ingredients:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Replace the values of the current arguments with their new values directly.&lt;/li&gt;
+&lt;li&gt;Jump straight to the next call of the function without adding to the stack;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This low-level, imperative optimization makes high-level,
+functional, recursive implementations efficient.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-headline-4" class="outline-2"&gt;
+&lt;h2 id="headline-4"&gt;
+Implementation
+&lt;/h2&gt;
+&lt;div id="outline-text-headline-4" class="outline-text-2"&gt;
+&lt;p&gt;
+In thinking about the implementation for &lt;code class="verbatim"&gt;l1&lt;/code&gt;, I was pleased to learn
+that Go actually has a &lt;code class="verbatim"&gt;goto&lt;/code&gt; statement.  However, my implementation
+was poorly set up to use it.&lt;/p&gt;
+&lt;p&gt;
+Early in the implementation of &lt;code class="verbatim"&gt;l1&lt;/code&gt;, I noticed that each data type
+(numbers, atoms, and lists) had its own evaluation rules, so it made
+sense to make use of Go's features supporting polymorphism, namely
+interfaces and receivers.  I had a &lt;code class="verbatim"&gt;Sexpr&lt;/code&gt; interface which looked like the following:&lt;/p&gt;
+&lt;div class="src src-text"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0"&gt;&lt;code class="language-text"&gt;&lt;span&gt;&lt;span&gt;type Sexpr interface {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;	String() string
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;	Eval(*env) (Sexpr, error)  // &amp;lt;--------
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;	Equal(Sexpr) bool
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;
+Numbers and atoms, for example, had fairly simple &lt;code class="verbatim"&gt;Eval&lt;/code&gt;
+implementations.  For example,&lt;/p&gt;
+&lt;div class="src src-text"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0"&gt;&lt;code class="language-text"&gt;&lt;span&gt;&lt;span&gt;func (a Atom) Eval(e *env) (Sexpr, error) {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;	if a.s == "t" {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;		return a, nil
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;	}
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;	ret, ok := e.Lookup(a.s)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;	if ok {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;		return ret, nil
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;	}
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;	ret, ok = builtins[a.s]
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;	if ok {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;		return ret, nil
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;	}
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;	return nil, fmt.Errorf("unknown symbol: %s", a.s)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;
+And, of course, numbers eval to themselves:&lt;/p&gt;
+&lt;div class="src src-text"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0"&gt;&lt;code class="language-text"&gt;&lt;span&gt;&lt;span&gt;func (n Number) Eval(e *env) (Sexpr, error) {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;	return n, nil
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;
+Lists, as you would expect, were more complicated - evaluating a list
+expression needs to handle special forms&lt;sup class="footnote-reference"&gt;&lt;a id="footnote-reference-2" href="#footnote-2"&gt;2&lt;/a&gt;&lt;/sup&gt;,
+user-defined functions, and built-in functions.  Following the classic
+&lt;a href="https://en.wikipedia.org/wiki/Structure_and_Interpretation_of_Computer_Programs"&gt;Structure and Interpretation of Computer Programs&lt;/a&gt;, I separated the
+core logic for function application into separate &lt;code class="verbatim"&gt;Eval&lt;/code&gt; and &lt;code class="verbatim"&gt;Apply&lt;/code&gt;
+phases.  And to prevent the &lt;code class="verbatim"&gt;Eval&lt;/code&gt; for lists from getting too large, I
+broke out the evaluation rules for different cases (e.g. for &lt;code class="verbatim"&gt;let&lt;/code&gt; and
+&lt;code class="verbatim"&gt;cond&lt;/code&gt; special forms and for function application) into their own
+functions.&lt;/p&gt;
+&lt;p&gt;
+In other words, I had evaluation logic spread over ten functions in
+five files.  Sadly, the need to jump back to the beginning of an
+evaluation rather than recursively calling &lt;code class="verbatim"&gt;Eval&lt;/code&gt; again meant that
+several of those nicely broken out functions had to be brought
+together into a single function, because &lt;code class="verbatim"&gt;goto&lt;/code&gt; &lt;a href="https://go.dev/ref/spec#Goto_statements"&gt;does not support
+jumping from one function to another&lt;/a&gt;.  (C has &lt;code class="verbatim"&gt;setjmp&lt;/code&gt; and &lt;code class="verbatim"&gt;longjmp&lt;/code&gt;,
+which effectively do this, but I would want to upgrade my IQ by a
+few points before applying them in this situation.)&lt;/p&gt;
+&lt;p&gt;
+There were actually three cases where I was performing an evaluation
+step right before returning, and the &lt;code class="verbatim"&gt;goto&lt;/code&gt; pattern could be used:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;When evaluating code in the tail position of a user-defined function;&lt;/li&gt;
+&lt;li&gt;When evaluating code in the last expression in a &lt;code class="verbatim"&gt;let&lt;/code&gt; block;&lt;/li&gt;
+&lt;li&gt;When evaluating code in the chosen branch of a &lt;code class="verbatim"&gt;cond&lt;/code&gt; clause.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I wound up with code which with looks like the following.  Several
+steps are indicated only with comments.  Note the tiny, easy-to-miss
+&lt;strong&gt;&lt;code class="verbatim"&gt;top:&lt;/code&gt;&lt;/strong&gt; label at the very beginning:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0"&gt;&lt;code class="language-text"&gt;&lt;span&gt;&lt;span&gt;// lisp.go
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;//
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;func eval(expr Sexpr, e *env) (Sexpr, error) {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;&lt;strong&gt;top:&lt;/strong&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;	switch t := expr.(type) {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;	case Atom:
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;		return evAtom(t, e)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;	case Number:
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;		return expr, nil
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;	// ...
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;	case *ConsCell:
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;		if t == Nil {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;			return Nil, nil
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;		}
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;		// special forms:
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;		if carAtom, ok := t.car.(Atom); ok {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;			switch {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;			case carAtom.s == "quote":
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;				return t.cdr.(*ConsCell).car, nil
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;			case carAtom.s == "cond":
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;				pairList := t.cdr.(*ConsCell)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;				if pairList == Nil {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					return Nil, nil
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;				}
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;				for {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					if pairList == Nil {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;						return Nil, nil
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					}
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					pair := pairList.car.(*ConsCell)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					ev, err := eval(pair.car, e)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					if err != nil {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;						return nil, err
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					}
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					if ev == Nil {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;						pairList = pairList.cdr.(*ConsCell)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;						continue
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					}
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					expr = pair.cdr.(*ConsCell).car
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					&lt;strong&gt;goto top&lt;/strong&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;				}
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;			// ...&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;
+The code so far shows the evaluation for atoms, numbers, and &lt;code class="verbatim"&gt;cond&lt;/code&gt;
+statements.  &lt;code class="verbatim"&gt;cond&lt;/code&gt; does not introduce any new bindings, but when the
+first truthy condition is encountered, it evaluates the next argument
+as its final act.  So the code above simply replaces the expression to
+be evaluated, &lt;code class="verbatim"&gt;expr&lt;/code&gt;, with the expression from the matching clause,
+and then restarts the evaluation via &lt;code class="verbatim"&gt;goto&lt;/code&gt;, without the overhead of a
+separate function call.&lt;/p&gt;
+&lt;p&gt;
+The code for &lt;code class="verbatim"&gt;let&lt;/code&gt; is somewhat similar:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0"&gt;&lt;code class="language-text"&gt;&lt;span&gt;&lt;span&gt;			case carAtom.s == "let":
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;				args := t.cdr.(*ConsCell)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;				if args == Nil {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					return nil, fmt.Errorf("let requires a binding list")
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;				}
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;				// ... code to set up let bindings ...
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;				body := args.cdr.(*ConsCell)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;				var ret Sexpr = Nil
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;				for {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					var err error
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					if body == Nil {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;						return ret, nil
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					}
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					// Implement TCO for `let`:
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					if body.cdr == Nil {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;						expr = body.car
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;						e = &amp;amp;newEnv
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;						&lt;strong&gt;goto top&lt;/strong&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					}
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					ret, err = eval(body.car, &amp;amp;newEnv)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					if err != nil {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;						return nil, err
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					}
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					body = body.cdr.(*ConsCell)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;				}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;
+The &lt;code class="verbatim"&gt;for&lt;/code&gt; loop invokes a new &lt;code class="verbatim"&gt;eval&lt;/code&gt; for each expression in the body of
+the &lt;code class="verbatim"&gt;let&lt;/code&gt;, &lt;em&gt;except&lt;/em&gt; for the last one: when the last expression is
+reached, (the &lt;code class="verbatim"&gt;cdr&lt;/code&gt; is &lt;code class="verbatim"&gt;Nil&lt;/code&gt;), the last &lt;code class="verbatim"&gt;eval&lt;/code&gt; is done by jumping to
+the beginning of the function, once it has updated its environment to
+point to include the new bindings.&lt;/p&gt;
+&lt;p&gt;
+The last use of this pattern is in function invocation proper, which looks similar:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0"&gt;&lt;code class="language-text"&gt;&lt;span&gt;&lt;span&gt;			// (... code to set up new environment based on passed arguments ...)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;			var ret Sexpr = Nil
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;			for {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;				if lambda.body == Nil {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					return ret, nil
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;				}
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;				// TCO:
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;				if lambda.body.cdr == Nil {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					expr = lambda.body.car
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					e = &amp;amp;newEnv
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					&lt;strong&gt;goto top&lt;/strong&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;				}
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;				ret, err = eval(lambda.body.car, &amp;amp;newEnv)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;				if err != nil {
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;					return nil, err
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;				}
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;				lambda.body = lambda.body.cdr.(*ConsCell)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;			}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;
+I've skipped various parts of &lt;code class="verbatim"&gt;eval&lt;/code&gt; that aren't relevant for TCO
+optimization - if you're interested, you can &lt;a href="https://github.com/eigenhombre/l1/blob/5873705ab1badb16dd1f1586bb7cc13467287187/lisp.go#L126"&gt;check out the code&lt;/a&gt;
+yourself.&lt;/p&gt;
+&lt;p&gt;
+To be clear, what we are optimizing is all tail calls, not just
+recursive ones - though the recursive ones were the primary objective
+due to the stack overflows reported above.&lt;/p&gt;
+&lt;p&gt;
+The end result is that &lt;code class="verbatim"&gt;sum-to&lt;/code&gt; now can complete for large values of
+$n$:&lt;/p&gt;
+&lt;div class="src src-text"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0"&gt;&lt;code class="language-text"&gt;&lt;span&gt;&lt;span&gt;(sum-to (* 1000 1000))
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;;;=&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;500000500000&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;
+Incidentally, a variant of our test case failed before I added the TCO
+optimization to &lt;code class="verbatim"&gt;let&lt;/code&gt; shown above; this now works, as well:&lt;/p&gt;
+&lt;div class="src src-text"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0"&gt;&lt;code class="language-text"&gt;&lt;span&gt;&lt;span&gt;(defn sum-to-acc-with-let (n acc)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;  (let ((_ 1))
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;    (cond ((zero? n) acc)
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;          (t (sum-to-acc-with-let (- n 1) (+ n acc))))))
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;(defn sum-to-with-let (n) (sum-to-acc-with-let n 0))
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;(sum-to-with-let (* 1000 1000))
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;;;=&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;500000500000&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-headline-5" class="outline-2"&gt;
+&lt;h2 id="headline-5"&gt;
+Conclusion
+&lt;/h2&gt;
+&lt;div id="outline-text-headline-5" class="outline-text-2"&gt;
+&lt;p&gt;
+Getting tail-call optimization to work was very satisfying... though
+the &lt;code class="verbatim"&gt;eval&lt;/code&gt; implementation is certainly more complex than before.  (Ah,
+optimization!)&lt;/p&gt;
+&lt;p&gt;
+To ensure TCO continues to work, variants of &lt;code class="verbatim"&gt;sum-to&lt;/code&gt; with and without &lt;code class="verbatim"&gt;let&lt;/code&gt; are &lt;a href="https://github.com/eigenhombre/l1/blob/5873705ab1badb16dd1f1586bb7cc13467287187/Makefile#L17"&gt;run
+on every build&lt;/a&gt;, along with a few other short example programs.&lt;/p&gt;
+&lt;p&gt;
+After implementing TCO in my own code, I can appreciate and understand
+the optimization better when I see it in the wild.  I fully expect to
+use the pattern again when implementing future lisps (yes, I hope there
+will be more).&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="footnotes"&gt;
+&lt;hr class="footnotes-separatator" /&gt;
+&lt;div class="footnote-definitions"&gt;
+&lt;div class="footnote-definition"&gt;
+&lt;sup id="footnote-1"&gt;&lt;a href="#footnote-reference-1"&gt;1&lt;/a&gt;&lt;/sup&gt;
+&lt;div class="footnote-body"&gt;
+&lt;p&gt;Note that this is a somewhat abstract representation: the details are language-specific.  The &lt;code class="verbatim"&gt;ret=sum-to:...&lt;/code&gt; notation means that when the function returns, control will pass back to where it left off inside the &lt;code class="verbatim"&gt;sum-to&lt;/code&gt; function.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="footnote-definition"&gt;
+&lt;sup id="footnote-2"&gt;&lt;a href="#footnote-reference-2"&gt;2&lt;/a&gt;&lt;/sup&gt;
+&lt;div class="footnote-body"&gt;
+&lt;p&gt;A special form is one that does not follow the normal evaluation rule for functions - it may evaluate its arguments once, many times, or not at all.  (I am glossing over macros for the time being; &lt;code class="verbatim"&gt;l1&lt;/code&gt; does not have them yet.)&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+	
+	<pubDate>Mon, 08 Aug 2022 00:00:00 GMT</pubDate>
+</item>
+
+<item>
+	<title>Nicolas Hafner: Return to Development - August Kandria Update</title>
+	<guid isPermaLink="true">https://reader.tymoon.eu/article/414</guid>
+	<link>https://reader.tymoon.eu/article/414</link>
+	
+	<description>&lt;img alt="https://studio.tymoon.eu/api/studio/file?id=2213" src="https://studio.tymoon.eu/api/studio/file?id=2213" /&gt;&lt;p&gt;&lt;a class="external-link" href="https://kandria.com/kickstarter"&gt;The Kickstarter&lt;/a&gt; is finally well behind us, and we're back to working on the game full-time. Not that we ever really stopped working on it, mind you, but at least there's a bunch of distractions now well behind us. But, let's still quickly summarise all that went down, eh?&lt;/p&gt;&lt;p&gt;If you backed us, I once again wanted to extend my heartfelt thanks to you. It's always very moving and greatly motivating to see people support what you do! You should have received an email from Backerkit by now that lets you set the details of your backer rewards. Please fill that survey out as soon as you can! If you didn't get any such email, you can manually trigger it again on Backerkit: &lt;a href="https://kandria.backerkit.com/"&gt;https://kandria.backerkit.com/&lt;/a&gt;&lt;/p&gt;&lt;p&gt;In case you missed the Kickstarter but would still like to support us, you can also do so by &lt;a class="external-link" href="https://kandria.com/preorder"&gt;preordering Kandria or its soundtrack&lt;/a&gt; through Backerkit. Unlike Kickstarter, this also accepts PayPal, if you don't have access to a credit card.&lt;/p&gt;&lt;h2 id="Gamescom &amp; Devcom"&gt;Gamescom &amp;amp; Devcom&lt;/h2&gt;&lt;p&gt;Gamescom is coming up at the end of the month, and Kandria will be there, at the Swiss Games booth in the business area! We'll have the game ready to play, and some chocolates for you to enjoy as well, so if you're around, please stop on by! I'd love to have a chat!&lt;/p&gt;&lt;img alt="https://filebox.tymoon.eu//file/TWpVMU53PT0=" src="https://filebox.tymoon.eu//file/TWpVMU53PT0=" /&gt;&lt;p&gt;We'll be there throughout the entire week (22nd-26th) so there's plenty of time to check out the booth as well.&lt;/p&gt;&lt;h2 id="Development"&gt;Development&lt;/h2&gt;&lt;p&gt;There's roughly four months left until until our planned release, and lord, there's still a tonne left to do. The game is fully playable, but a lot of the areas are still unfinished and need a ton of polish. That's what we're going to focus on now.&lt;/p&gt;&lt;p&gt;We've also started playtesting of the full game. So far we haven't encountered any breaking bugs, just minor issues that we'll iron out in the coming days. This is, at least to me, a very good sign, and it seems we shouldn't hit any major roadblocks and things are still proceeding according to schedule.&lt;/p&gt;&lt;p&gt;So what exactly &lt;em&gt;is&lt;/em&gt; left to do? We'll, here's an excerpt:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;&lt;strong&gt;Playtest the main quest line&lt;/strong&gt;&lt;br /&gt;This also requires playing the game in a variety of ways to make sure that if the player doesn't solve quests in exactly the order and way we had envisioned won't break things, and that NPC dialogue still makes sense even then.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;&lt;strong&gt;Finish out the side quests&lt;/strong&gt;&lt;br /&gt;Aside from the main quest line we have a bunch of side quests that take you through more of the world and give you a few more extravagant things to do, and we still need to finish implementing a couple of those.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;&lt;strong&gt;Detail out all the rooms&lt;/strong&gt;&lt;br /&gt;Right now many of the rooms in the lower regions are filled out using auto-tiling, meaning they lack a lot of the extra detail that we've added for the other rooms by hand. This'll be my main job for a while, as detailing everything takes a lot of time.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;&lt;strong&gt;Tune the progression curve&lt;/strong&gt;&lt;br /&gt;Almost anything you do in Kandria - finding stuff, exploring, defeating enemies, completing quests, fishing - awards you exp, which feeds back into the levelling system. We need to make sure that there's a good progression curve to your levels, and that the enemies scale at an appropriate rate as well to drive the difficulty.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;&lt;strong&gt;Fixing all sorts of minor bugs&lt;/strong&gt;&lt;br /&gt;There's a lot of teensy bugs to iron out, like minor display problems in the UI and so forth. I hope we can iron out all the ones we know about by the time the game comes out!&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Alright, that's about it for now. If you want to receive more frequent updates and news, along with occasional in-depth emails about specific problems and solutions encountered during development, &lt;a class="external-link" href="https://courier.tymoon.eu/subscription/1"&gt;sign up for the newsletter!&lt;/a&gt;&lt;/p&gt;</description>
+	
+	<pubDate>Mon, 01 Aug 2022 18:28:41 GMT</pubDate>
+</item>
+
+
+</channel>
+</rss>
