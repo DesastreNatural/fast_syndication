@@ -58,17 +58,13 @@
 # logo - image
 
 defmodule FastSyndication.Feed do
-    
-    defstruct [
-        feed_type: nil,
-        title: nil,
-        description: nil,
-        url: nil,
-        image: nil,
-        categories: [],
-        language: nil,
-        updated_at: nil,
-        entries: []
-    ]
-
+  defstruct feed_type: nil,
+            title: nil,
+            description: nil,
+            url: nil,
+            image: nil,
+            categories: [],
+            language: nil,
+            updated_at: nil,
+            entries: []
 end

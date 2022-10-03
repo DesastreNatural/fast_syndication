@@ -11,51 +11,53 @@ defmodule FastSyndicationTest do
   end
 
   test "parsing an atom feed" do
-    {_status,data} = FastSyndication.parse(atom())
-    feed_type = data.feed_type 
+    {_status, data} = FastSyndication.parse(atom())
+    feed_type = data.feed_type
     assert feed_type == "atom"
   end
+
   test "parsing a rss feed" do
-    {_status,data} = FastSyndication.parse(rss())
-    feed_type = data.feed_type 
+    {_status, data} = FastSyndication.parse(rss())
+    feed_type = data.feed_type
     assert feed_type == "rss"
   end
+
   test "parsing planet lisp rss feed" do
     rss = File.read!("test/samples/rss-planetlisp.xml")
-    {status,data} = FastSyndication.parse(rss)
-    assert (
-      (status == :ok) && 
-      (data.feed_type == "rss") && 
-      (data.title == "Planet Lisp") &&
-      (data.description == "Planet Lisp") &&
-      (data.url == "http://planet.lisp.org/") &&
-      (data.language == "en") &&
-      ((List.first(data.entries)).title == "Nicolas Hafner: Kandria enters beta - September Kandria Update") &&
-      ((List.first(data.entries)).link == "https://reader.tymoon.eu/article/415")
-    )
+    {status, data} = FastSyndication.parse(rss)
+
+    assert status == :ok &&
+             data.feed_type == "rss" &&
+             data.title == "Planet Lisp" &&
+             data.description == "Planet Lisp" &&
+             data.url == "http://planet.lisp.org/" &&
+             data.language == "en" &&
+             List.first(data.entries).title ==
+               "Nicolas Hafner: Kandria enters beta - September Kandria Update" &&
+             List.first(data.entries).link == "https://reader.tymoon.eu/article/415"
   end
+
   test "parsing planet haskell atom feed" do
     atom = File.read!("test/samples/atom-planethaskell.xml")
-    {status,data} = FastSyndication.parse(atom)
-    assert (
-      (status == :ok) && 
-      (data.feed_type == "atom") && 
-      (data.title == "Planet Haskell")
-    )
+    {status, data} = FastSyndication.parse(atom)
+
+    assert status == :ok &&
+             data.feed_type == "atom" &&
+             data.title == "Planet Haskell"
   end
 
   test "parsing a feed list of links" do
     links = get_links_list()
-    results_debug = for link <- links, do: (HTTPoison.get!(link, [], follow_redirect: true).body)
+    results_debug = for link <- links, do: HTTPoison.get!(link, [], follow_redirect: true).body
     data_debug = for result <- results_debug, do: FastSyndication.parse(result)
-    results = for result <- results_debug, do: (FastSyndication.parse(result) |> elem(0)) == :ok
+    results = for result <- results_debug, do: FastSyndication.parse(result) |> elem(0) == :ok
     assert Enum.all?(results) == true
   end
 
   defp get_links_list() do
-    File.read!("test/samples/links") |>
-    String.replace("\r","") |>
-    String.split("\n", trim: true)
+    File.read!("test/samples/links")
+    |> String.replace("\r", "")
+    |> String.split("\n", trim: true)
   end
 
   defp atom() do

@@ -45,16 +45,21 @@ defmodule FastSyndication do
     case parse_atom(data) do
       {:error, _atom_error} ->
         case parse_rss(data) do
-          {:error, rss_error} -> {:error, "Can't recognize feed type: #{Kernel.inspect(rss_error)}"}
-          {:ok, data} -> {:ok, :rss, data}
+          {:error, rss_error} ->
+            {:error, "Can't recognize feed type: #{Kernel.inspect(rss_error)}"}
+
+          {:ok, data} ->
+            {:ok, :rss, data}
         end
-      {:ok, data} -> {:ok, :atom, data}
+
+      {:ok, data} ->
+        {:ok, :atom, data}
     end
   end
 
   def parse(data) do
-    recognize(data) |> # IO.inspect |>
-    FastSyndication.Normalization.normalize_feed()
+    # IO.inspect |>
+    recognize(data)
+    |> FastSyndication.Normalization.normalize_feed()
   end
-
 end
